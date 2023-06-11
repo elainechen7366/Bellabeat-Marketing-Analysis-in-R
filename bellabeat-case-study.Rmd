@@ -2,7 +2,7 @@
 title: "bellabeat-case-study"
 author: "Elaine"
 date: '2023-06-11'
-output: github_document
+output: output: rmarkdown::github_document
 editor_options: 
   markdown: 
     wrap: 72
