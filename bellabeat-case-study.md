@@ -1,12 +1,7 @@
----
-title: "bellabeat-case-study"
-author: "Elaine"
-date: '2023-06-11'
-output: github_document
-editor_options: 
-  markdown: 
-    wrap: 72
----
+bellabeat-case-study
+================
+Elaine
+2023-06-11
 
 # Business Task
 
@@ -89,8 +84,8 @@ Audience**
         logging moods.
     -   The wearable devices are not waterproof
 
-> I've listed some of the Bellabeat customer feedback I've collected
-> from online platforms, including reviews on Amazon, Bellabeat's
+> I’ve listed some of the Bellabeat customer feedback I’ve collected
+> from online platforms, including reviews on Amazon, Bellabeat’s
 > official website, YouTube, or articles from writing influencers. If I
 > were one of the Bellabeat employees, I would ask the marketing team to
 > give me customer feedback.
@@ -102,7 +97,7 @@ shipments](https://www.statista.com/statistics/910862/worldwide-smartwatch-shipm
 the four most popular smartwatch vendors are Apple, Samsung, Fitbit and
 Garmin. I will make some points about why these brands attract users.
 One of the most important thing is why people buy wearable devices.
-Here's a survey posted in statista link. Although the survey was done in
+Here’s a survey posted in statista link. Although the survey was done in
 India, it is still a good reference to find out why people buy these
 products since India is an emerging market for wearables. The top two
 reasons are
@@ -114,7 +109,7 @@ reasons are
 **Brand Comperison**
 
 | Brand     | Product        | Basic Price | Weight | Possible reasons of why people buy it                                        |
-|---------------|---------------|---------------|---------------|---------------|
+|-----------|----------------|-------------|--------|------------------------------------------------------------------------------|
 | Apple     | Series 7       | USD 399     | 34.7 g | Appealing design and functions, Apple’s ecosystem                            |
 | Samsung   | Galaxy Watch4  | USD 245     | 25.9 g | Samsung ecosystem                                                            |
 | Fitbit    | Charge 5       | USD 180     | 27 g   | Affordable, Fitbit community (Share progress with friends)                   |
@@ -124,7 +119,7 @@ reasons are
 **Smartwatches Designed for Women**
 
 | Brand        | Product       | Possible reasons of why people buy it                                                                |
-|------------------------|------------------------|------------------------|
+|--------------|---------------|------------------------------------------------------------------------------------------------------|
 | Fitbit       | Luxe          | With interchangeable straps designed by jewelry brand gorjana                                        |
 | Garmin       | Lily          | Besides normal tracking functions, it also includes menstrual cycle tracking and pregnancy tracking. |
 | Michael Kors | Access Gen 5E | From fashion clothing brand. With multiple customization options for straps and watch faces.         |
@@ -143,17 +138,7 @@ habits.
 Before loading Fitbit data, some frequently used packages and libraries
 should be ready.
 
-```{r include=FALSE}
-# --- Load libraries
-library("dplyr")
-library("readxl")
-library("ggplot2")
-library("scales")
-library("tidyverse")
-library("skimr")
-```
-
-```{r message = FALSE}
+``` r
 # --- Load files
 daily_activity <- read.csv("Data/dailyActivity_merged.csv")
 daily_calories <- read.csv("Data/dailyCalories_merged.csv")
@@ -175,67 +160,521 @@ sleep_day <- read.csv("Data/sleepDay_merged.csv")
 weight_loginfo <- read.csv("Data/weightLogInfo_merged.csv")
 ```
 
-In the following section, I'll check the file structure and then rename
+In the following section, I’ll check the file structure and then rename
 attributes the way I want.
 
-```{r message = FALSE}
+``` r
 print("---------------- daily_activity ----------------")
+```
+
+    ## [1] "---------------- daily_activity ----------------"
+
+``` r
 glimpse(daily_activity)
+```
+
+    ## Rows: 940
+    ## Columns: 15
+    ## $ Id                       <dbl> 1503960366, 1503960366, 1503960366, 150396036…
+    ## $ ActivityDate             <chr> "4/12/2016", "4/13/2016", "4/14/2016", "4/15/…
+    ## $ TotalSteps               <int> 13162, 10735, 10460, 9762, 12669, 9705, 13019…
+    ## $ TotalDistance            <dbl> 8.50, 6.97, 6.74, 6.28, 8.16, 6.48, 8.59, 9.8…
+    ## $ TrackerDistance          <dbl> 8.50, 6.97, 6.74, 6.28, 8.16, 6.48, 8.59, 9.8…
+    ## $ LoggedActivitiesDistance <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ VeryActiveDistance       <dbl> 1.88, 1.57, 2.44, 2.14, 2.71, 3.19, 3.25, 3.5…
+    ## $ ModeratelyActiveDistance <dbl> 0.55, 0.69, 0.40, 1.26, 0.41, 0.78, 0.64, 1.3…
+    ## $ LightActiveDistance      <dbl> 6.06, 4.71, 3.91, 2.83, 5.04, 2.51, 4.71, 5.0…
+    ## $ SedentaryActiveDistance  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ VeryActiveMinutes        <int> 25, 21, 30, 29, 36, 38, 42, 50, 28, 19, 66, 4…
+    ## $ FairlyActiveMinutes      <int> 13, 19, 11, 34, 10, 20, 16, 31, 12, 8, 27, 21…
+    ## $ LightlyActiveMinutes     <int> 328, 217, 181, 209, 221, 164, 233, 264, 205, …
+    ## $ SedentaryMinutes         <int> 728, 776, 1218, 726, 773, 539, 1149, 775, 818…
+    ## $ Calories                 <int> 1985, 1797, 1776, 1745, 1863, 1728, 1921, 203…
+
+``` r
 print("---------------- daily_calories ----------------")
+```
+
+    ## [1] "---------------- daily_calories ----------------"
+
+``` r
 glimpse(daily_calories)
+```
+
+    ## Rows: 940
+    ## Columns: 3
+    ## $ Id          <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960366…
+    ## $ ActivityDay <chr> "4/12/2016", "4/13/2016", "4/14/2016", "4/15/2016", "4/16/…
+    ## $ Calories    <int> 1985, 1797, 1776, 1745, 1863, 1728, 1921, 2035, 1786, 1775…
+
+``` r
 print("---------------- daily_intensities ----------------")
+```
+
+    ## [1] "---------------- daily_intensities ----------------"
+
+``` r
 glimpse(daily_intensities)
+```
+
+    ## Rows: 940
+    ## Columns: 10
+    ## $ Id                       <dbl> 1503960366, 1503960366, 1503960366, 150396036…
+    ## $ ActivityDay              <chr> "4/12/2016", "4/13/2016", "4/14/2016", "4/15/…
+    ## $ SedentaryMinutes         <int> 728, 776, 1218, 726, 773, 539, 1149, 775, 818…
+    ## $ LightlyActiveMinutes     <int> 328, 217, 181, 209, 221, 164, 233, 264, 205, …
+    ## $ FairlyActiveMinutes      <int> 13, 19, 11, 34, 10, 20, 16, 31, 12, 8, 27, 21…
+    ## $ VeryActiveMinutes        <int> 25, 21, 30, 29, 36, 38, 42, 50, 28, 19, 66, 4…
+    ## $ SedentaryActiveDistance  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ LightActiveDistance      <dbl> 6.06, 4.71, 3.91, 2.83, 5.04, 2.51, 4.71, 5.0…
+    ## $ ModeratelyActiveDistance <dbl> 0.55, 0.69, 0.40, 1.26, 0.41, 0.78, 0.64, 1.3…
+    ## $ VeryActiveDistance       <dbl> 1.88, 1.57, 2.44, 2.14, 2.71, 3.19, 3.25, 3.5…
+
+``` r
 print("---------------- daily_steps ----------------")
+```
+
+    ## [1] "---------------- daily_steps ----------------"
+
+``` r
 glimpse(daily_steps)
+```
+
+    ## Rows: 940
+    ## Columns: 3
+    ## $ Id          <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960366…
+    ## $ ActivityDay <chr> "4/12/2016", "4/13/2016", "4/14/2016", "4/15/2016", "4/16/…
+    ## $ StepTotal   <int> 13162, 10735, 10460, 9762, 12669, 9705, 13019, 15506, 1054…
+
+``` r
 print("---------------- heartrate_seconds ----------------")
+```
+
+    ## [1] "---------------- heartrate_seconds ----------------"
+
+``` r
 glimpse(heartrate_seconds)
+```
+
+    ## Rows: 2,483,658
+    ## Columns: 3
+    ## $ Id    <dbl> 2022484408, 2022484408, 2022484408, 2022484408, 2022484408, 2022…
+    ## $ Time  <chr> "4/12/2016 7:21:00 AM", "4/12/2016 7:21:05 AM", "4/12/2016 7:21:…
+    ## $ Value <int> 97, 102, 105, 103, 101, 95, 91, 93, 94, 93, 92, 89, 83, 61, 60, …
+
+``` r
 print("---------------- hourly_calories ----------------")
+```
+
+    ## [1] "---------------- hourly_calories ----------------"
+
+``` r
 glimpse(hourly_calories)
+```
+
+    ## Rows: 22,099
+    ## Columns: 3
+    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
+    ## $ ActivityHour <chr> "4/12/2016 12:00:00 AM", "4/12/2016 1:00:00 AM", "4/12/20…
+    ## $ Calories     <int> 81, 61, 59, 47, 48, 48, 48, 47, 68, 141, 99, 76, 73, 66, …
+
+``` r
 print("---------------- hourly_intensities ----------------")
+```
+
+    ## [1] "---------------- hourly_intensities ----------------"
+
+``` r
 glimpse(hourly_intensities)
+```
+
+    ## Rows: 22,099
+    ## Columns: 4
+    ## $ Id               <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 15039…
+    ## $ ActivityHour     <chr> "4/12/2016 12:00:00 AM", "4/12/2016 1:00:00 AM", "4/1…
+    ## $ TotalIntensity   <int> 20, 8, 7, 0, 0, 0, 0, 0, 13, 30, 29, 12, 11, 6, 36, 5…
+    ## $ AverageIntensity <dbl> 0.333333, 0.133333, 0.116667, 0.000000, 0.000000, 0.0…
+
+``` r
 print("---------------- hourly_steps ----------------")
+```
+
+    ## [1] "---------------- hourly_steps ----------------"
+
+``` r
 glimpse(hourly_steps)
+```
+
+    ## Rows: 22,099
+    ## Columns: 3
+    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
+    ## $ ActivityHour <chr> "4/12/2016 12:00:00 AM", "4/12/2016 1:00:00 AM", "4/12/20…
+    ## $ StepTotal    <int> 373, 160, 151, 0, 0, 0, 0, 0, 250, 1864, 676, 360, 253, 2…
+
+``` r
 print("---------------- minute_calories_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_calories_narrow ----------------"
+
+``` r
 glimpse(minute_calories_narrow)
+```
+
+    ## Rows: 1,325,580
+    ## Columns: 3
+    ## $ Id             <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960…
+    ## $ ActivityMinute <chr> "4/12/2016 12:00:00 AM", "4/12/2016 12:01:00 AM", "4/12…
+    ## $ Calories       <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0.9438,…
+
+``` r
 print("---------------- minute_calories_wide ----------------")
+```
+
+    ## [1] "---------------- minute_calories_wide ----------------"
+
+``` r
 glimpse(minute_calories_wide)
+```
+
+    ## Rows: 21,645
+    ## Columns: 62
+    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
+    ## $ ActivityHour <chr> "4/13/2016 12:00:00 AM", "4/13/2016 1:00:00 AM", "4/13/20…
+    ## $ Calories00   <dbl> 1.8876, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories01   <dbl> 2.2022, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories02   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories03   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories04   <dbl> 0.9438, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories05   <dbl> 2.0449, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories06   <dbl> 0.9438, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories07   <dbl> 2.2022, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories08   <dbl> 0.9438, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories09   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories10   <dbl> 0.9438, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories11   <dbl> 0.78650, 0.78650, 0.78650, 2.04490, 0.78650, 0.78650, 0.7…
+    ## $ Calories12   <dbl> 0.78650, 0.94380, 0.78650, 0.94380, 0.78650, 0.78650, 0.7…
+    ## $ Calories13   <dbl> 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
+    ## $ Calories14   <dbl> 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
+    ## $ Calories15   <dbl> 0.9438, 0.7865, 0.7865, 0.9438, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories16   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories17   <dbl> 0.7865, 0.7865, 0.7865, 0.9438, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories18   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories19   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0.9438, 0.7865, 0…
+    ## $ Calories20   <dbl> 1.88760, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
+    ## $ Calories21   <dbl> 0.94380, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
+    ## $ Calories22   <dbl> 0.94380, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
+    ## $ Calories23   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories24   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories25   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
+    ## $ Calories26   <dbl> 2.3595, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
+    ## $ Calories27   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories28   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories29   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories30   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories31   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
+    ## $ Calories32   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories33   <dbl> 1.8876, 0.7865, 0.7865, 0.9438, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories34   <dbl> 0.9438, 0.7865, 0.7865, 2.0449, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories35   <dbl> 0.7865, 0.7865, 0.7865, 2.0449, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories36   <dbl> 0.7865, 0.7865, 0.7865, 1.8876, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories37   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories38   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories39   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories40   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0…
+    ## $ Calories41   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 2…
+    ## $ Calories42   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
+    ## $ Calories43   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0…
+    ## $ Calories44   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories45   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories46   <dbl> 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
+    ## $ Calories47   <dbl> 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
+    ## $ Calories48   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0…
+    ## $ Calories49   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories50   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
+    ## $ Calories51   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
+    ## $ Calories52   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories53   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories54   <dbl> 2.3595, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories55   <dbl> 1.8876, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories56   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories57   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories58   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
+    ## $ Calories59   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
+
+``` r
 print("---------------- minute_intensities_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_intensities_narrow ----------------"
+
+``` r
 glimpse(minute_intensities_narrow)
+```
+
+    ## Rows: 1,325,580
+    ## Columns: 3
+    ## $ Id             <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960…
+    ## $ ActivityMinute <chr> "4/12/2016 12:00:00 AM", "4/12/2016 12:01:00 AM", "4/12…
+    ## $ Intensity      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+
+``` r
 print("---------------- minute_intensities_wide ----------------")
+```
+
+    ## [1] "---------------- minute_intensities_wide ----------------"
+
+``` r
 glimpse(minute_intensities_wide)
+```
+
+    ## Rows: 21,645
+    ## Columns: 62
+    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
+    ## $ ActivityHour <chr> "4/13/2016 12:00:00 AM", "4/13/2016 1:00:00 AM", "4/13/20…
+    ## $ Intensity00  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 3, …
+    ## $ Intensity01  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity02  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, …
+    ## $ Intensity03  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, …
+    ## $ Intensity04  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity05  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
+    ## $ Intensity06  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, …
+    ## $ Intensity07  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, …
+    ## $ Intensity08  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, …
+    ## $ Intensity09  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity10  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
+    ## $ Intensity11  <int> 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, …
+    ## $ Intensity12  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, …
+    ## $ Intensity13  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0, 1, 0, 0, …
+    ## $ Intensity14  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, …
+    ## $ Intensity15  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity16  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, …
+    ## $ Intensity17  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 1, 0, 0, 1, …
+    ## $ Intensity18  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, …
+    ## $ Intensity19  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, …
+    ## $ Intensity20  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, …
+    ## $ Intensity21  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 3, 1, 0, 0, 0, …
+    ## $ Intensity22  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 3, 0, 0, 0, 0, …
+    ## $ Intensity23  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, …
+    ## $ Intensity24  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 3, 0, 0, 0, 0, …
+    ## $ Intensity25  <int> 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 3, 0, 0, 0, 0, …
+    ## $ Intensity26  <int> 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 0, 0, …
+    ## $ Intensity27  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, …
+    ## $ Intensity28  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, …
+    ## $ Intensity29  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, …
+    ## $ Intensity30  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, …
+    ## $ Intensity31  <int> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, …
+    ## $ Intensity32  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity33  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity34  <int> 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity35  <int> 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, …
+    ## $ Intensity36  <int> 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity37  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity38  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity39  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity40  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Intensity41  <int> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, …
+    ## $ Intensity42  <int> 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
+    ## $ Intensity43  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
+    ## $ Intensity44  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, …
+    ## $ Intensity45  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, …
+    ## $ Intensity46  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, …
+    ## $ Intensity47  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, …
+    ## $ Intensity48  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, …
+    ## $ Intensity49  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, …
+    ## $ Intensity50  <int> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
+    ## $ Intensity51  <int> 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 1, …
+    ## $ Intensity52  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, …
+    ## $ Intensity53  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2, 1, …
+    ## $ Intensity54  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, …
+    ## $ Intensity55  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 1, …
+    ## $ Intensity56  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 1, …
+    ## $ Intensity57  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 1, …
+    ## $ Intensity58  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, …
+    ## $ Intensity59  <int> 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 3, 0, …
+
+``` r
 print("---------------- minute_METs_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_METs_narrow ----------------"
+
+``` r
 glimpse(minute_METs_narrow)
+```
+
+    ## Rows: 1,325,580
+    ## Columns: 3
+    ## $ Id             <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960…
+    ## $ ActivityMinute <chr> "4/12/2016 12:00:00 AM", "4/12/2016 12:01:00 AM", "4/12…
+    ## $ METs           <int> 10, 10, 10, 10, 10, 12, 12, 12, 12, 12, 12, 12, 10, 10,…
+
+``` r
 print("---------------- minute_sleep ----------------")
+```
+
+    ## [1] "---------------- minute_sleep ----------------"
+
+``` r
 glimpse(minute_sleep)
+```
+
+    ## Rows: 188,521
+    ## Columns: 4
+    ## $ Id    <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960366, 1503…
+    ## $ date  <chr> "4/12/2016 2:47:30 AM", "4/12/2016 2:48:30 AM", "4/12/2016 2:49:…
+    ## $ value <int> 3, 2, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1…
+    ## $ logId <dbl> 11380564589, 11380564589, 11380564589, 11380564589, 11380564589,…
+
+``` r
 print("---------------- minute_steps_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_steps_narrow ----------------"
+
+``` r
 glimpse(minute_steps_narrow)
+```
+
+    ## Rows: 1,325,580
+    ## Columns: 3
+    ## $ Id             <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960…
+    ## $ ActivityMinute <chr> "4/12/2016 12:00:00 AM", "4/12/2016 12:01:00 AM", "4/12…
+    ## $ Steps          <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+
+``` r
 print("---------------- minute_steps_wide ----------------")
+```
+
+    ## [1] "---------------- minute_steps_wide ----------------"
+
+``` r
 glimpse(minute_steps_wide)
+```
+
+    ## Rows: 21,645
+    ## Columns: 62
+    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
+    ## $ ActivityHour <chr> "4/13/2016 12:00:00 AM", "4/13/2016 1:00:00 AM", "4/13/20…
+    ## $ Steps00      <int> 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 9, 0, 0, 0, 0, 0, 91…
+    ## $ Steps01      <int> 16, 0, 0, 0, 0, 0, 0, 0, 0, 14, 11, 0, 0, 0, 0, 0, 0, 0, …
+    ## $ Steps02      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 30, 0, 0, 0, 64, 0, 0, 0, …
+    ## $ Steps03      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 51, 0, 0, 0, 22, 0, 0, 0, …
+    ## $ Steps04      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 0, 24, 0, 0, 0, 0, 0, 0…
+    ## $ Steps05      <int> 9, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 32…
+    ## $ Steps06      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 5, 0, 0, 30, 0, 0…
+    ## $ Steps07      <int> 17, 0, 0, 0, 0, 0, 0, 0, 0, 12, 8, 0, 0, 0, 0, 0, 35, 0, …
+    ## $ Steps08      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 81, 0, 0, 4, 0, 0, 0, 0, 0,…
+    ## $ Steps09      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 14, 0, 0, 0, 0, 0, 0…
+    ## $ Steps10      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 81,…
+    ## $ Steps11      <int> 0, 0, 0, 10, 0, 0, 0, 0, 6, 109, 0, 0, 0, 0, 14, 0, 0, 0,…
+    ## $ Steps12      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 0, 29, 9, 0, 31, 0, 23, 0…
+    ## $ Steps13      <int> 0, 0, 0, 0, 0, 0, 0, 0, 19, 145, 0, 0, 0, 0, 39, 0, 51, 0…
+    ## $ Steps14      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 15, 0, 0, 51, 0, 0, 0,…
+    ## $ Steps15      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 62, 6, 0, 0, 0, 0, 0, …
+    ## $ Steps16      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 31, 0, 8, 24, 0, 0, 0, …
+    ## $ Steps17      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 58, 65, 43, 0, 0,…
+    ## $ Steps18      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 110, 15, 92, 0, 0,…
+    ## $ Steps19      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 97, 51, 80, 0, 0, …
+    ## $ Steps20      <int> 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 10, 0, 0, …
+    ## $ Steps21      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 27, 0, 5, 126, 9, 0, 0, …
+    ## $ Steps22      <int> 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 17, 0, 4, 126, 0, 0, 0,…
+    ## $ Steps23      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 0, 0, 109, 0, 0, 0, …
+    ## $ Steps24      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 29, 0, 0, 112, 0, 0, 0,…
+    ## $ Steps25      <int> 11, 0, 0, 0, 0, 0, 0, 26, 0, 0, 9, 13, 65, 0, 93, 0, 0, 0…
+    ## $ Steps26      <int> 21, 0, 0, 0, 0, 0, 0, 11, 0, 0, 6, 0, 0, 4, 121, 0, 0, 0,…
+    ## $ Steps27      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 123, 0, 0, 0, …
+    ## $ Steps28      <int> 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0…
+    ## $ Steps29      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0,…
+    ## $ Steps30      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 66, 0, 0…
+    ## $ Steps31      <int> 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 20, 0, 66, 0, 0…
+    ## $ Steps32      <int> 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0,…
+    ## $ Steps33      <int> 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0…
+    ## $ Steps34      <int> 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 0, 0, 0, 0, 0…
+    ## $ Steps35      <int> 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 4, 0, 83, 0, 0, 0, 0, 4, 0,…
+    ## $ Steps36      <int> 0, 0, 0, 6, 0, 0, 0, 0, 45, 21, 0, 8, 8, 0, 0, 0, 0, 0, 0…
+    ## $ Steps37      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+    ## $ Steps38      <int> 0, 0, 0, 0, 0, 0, 0, 0, 7, 84, 0, 65, 0, 0, 0, 0, 0, 0, 0…
+    ## $ Steps39      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 65, 0, 0, 0, 0, 0, 0, …
+    ## $ Steps40      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 8, 0, 0, 0, 0, 0, 0, 0, 0,…
+    ## $ Steps41      <int> 0, 0, 0, 0, 0, 0, 0, 28, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 27…
+    ## $ Steps42      <int> 0, 0, 0, 0, 0, 0, 0, 7, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12…
+    ## $ Steps43      <int> 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12…
+    ## $ Steps44      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 11…
+    ## $ Steps45      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 122, 0, 0, 0, 0, 0, 0, 4, 0, 4…
+    ## $ Steps46      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 0, 64, 0, 0, …
+    ## $ Steps47      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 0, 29, 7, 35, …
+    ## $ Steps48      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 16, 0, 7, 0, 0, 23, 7, 31,…
+    ## $ Steps49      <int> 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 12, 0, 8, 6…
+    ## $ Steps50      <int> 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11…
+    ## $ Steps51      <int> 9, 0, 0, 0, 0, 0, 0, 13, 21, 8, 0, 0, 0, 0, 0, 12, 10, 39…
+    ## $ Steps52      <int> 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 13, 1…
+    ## $ Steps53      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 35, 0, 63, 1…
+    ## $ Steps54      <int> 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 0, 36, …
+    ## $ Steps55      <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 84, 0, 7, 0, 0, 0, 81, 4…
+    ## $ Steps56      <int> 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 5, 0, 0, 0, 0, 0, 47, 2…
+    ## $ Steps57      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 115, …
+    ## $ Steps58      <int> 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 105, …
+    ## $ Steps59      <int> 0, 0, 0, 0, 0, 0, 0, 16, 2, 105, 0, 0, 12, 0, 0, 0, 0, 11…
+
+``` r
 print("---------------- sleep_day ----------------")
+```
+
+    ## [1] "---------------- sleep_day ----------------"
+
+``` r
 glimpse(sleep_day)
+```
+
+    ## Rows: 413
+    ## Columns: 5
+    ## $ Id                 <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150…
+    ## $ SleepDay           <chr> "4/12/2016 12:00:00 AM", "4/13/2016 12:00:00 AM", "…
+    ## $ TotalSleepRecords  <int> 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+    ## $ TotalMinutesAsleep <int> 327, 384, 412, 340, 700, 304, 360, 325, 361, 430, 2…
+    ## $ TotalTimeInBed     <int> 346, 407, 442, 367, 712, 320, 377, 364, 384, 449, 3…
+
+``` r
 print("---------------- weight_loginfo ----------------")
+```
+
+    ## [1] "---------------- weight_loginfo ----------------"
+
+``` r
 glimpse(weight_loginfo)
 ```
+
+    ## Rows: 67
+    ## Columns: 8
+    ## $ Id             <dbl> 1503960366, 1503960366, 1927972279, 2873212765, 2873212…
+    ## $ Date           <chr> "5/2/2016 11:59:59 PM", "5/3/2016 11:59:59 PM", "4/13/2…
+    ## $ WeightKg       <dbl> 52.6, 52.6, 133.5, 56.7, 57.3, 72.4, 72.3, 69.7, 70.3, …
+    ## $ WeightPounds   <dbl> 115.9631, 115.9631, 294.3171, 125.0021, 126.3249, 159.6…
+    ## $ Fat            <int> 22, NA, NA, NA, NA, 25, NA, NA, NA, NA, NA, NA, NA, NA,…
+    ## $ BMI            <dbl> 22.65, 22.65, 47.54, 21.45, 21.69, 27.45, 27.38, 27.25,…
+    ## $ IsManualReport <chr> "True", "True", "False", "True", "True", "True", "True"…
+    ## $ LogId          <dbl> 1.462234e+12, 1.462320e+12, 1.460510e+12, 1.461283e+12,…
 
 From the glimpse function, we can find out that
 
 -   Every file contains user id and timestamp
 -   The naming rule is not consistent among files
-    -   **Naming Convention:** For example, in "minute_sleep", most of
+    -   **Naming Convention:** For example, in “minute_sleep”, most of
         the attributes are using camelCase while the id follows the rule
         of UpperCamelCase.
     -   **Meaning of Attributes:** For example, according to most of the
         files, the attribute related to the timestamp will add the
-        minimum changing unit, like in "hourly_intensities", the
-        attribute is "ActivityHour". So we might know that the intensity
+        minimum changing unit, like in “hourly_intensities”, the
+        attribute is “ActivityHour”. So we might know that the intensity
         values are recorded every hour or maybe every 2 hours. In
-        "heartrate_seconds", the attribute is named "Time" which is a
+        “heartrate_seconds”, the attribute is named “Time” which is a
         bit different from the rule that is used in other files.
 
-I'm going to use snake_case to rename attributes and unify variables
+I’m going to use snake_case to rename attributes and unify variables
 across different files that actually have the same meaning.
 
-```{r message = FALSE}
+``` r
 ## daily_activity
 names(daily_activity)[names(daily_activity) == "Id"] <- "id"
 names(daily_activity)[names(daily_activity) == "ActivityDate"] <- "activity_day"
@@ -365,31 +804,118 @@ names(weight_loginfo)[names(weight_loginfo) == "LogId"] <- "log_id"
 Now, the first question that comes to my mind is how many user ids and
 how many days are recorded in each file.
 
-```{r message = FALSE}
+``` r
 n_unique(daily_activity$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(daily_calories$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(daily_intensities$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(daily_steps$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(heartrate_seconds$id)
+```
+
+    ## [1] 14
+
+``` r
 n_unique(hourly_calories$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(hourly_intensities$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(hourly_steps$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(minute_calories_narrow$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(minute_calories_wide$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(minute_intensities_narrow$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(minute_intensities_wide$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(minute_METs_narrow$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(minute_sleep$id)
+```
+
+    ## [1] 24
+
+``` r
 n_unique(minute_steps_narrow$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(minute_steps_wide$id)
+```
+
+    ## [1] 33
+
+``` r
 n_unique(sleep_day$id)
+```
+
+    ## [1] 24
+
+``` r
 n_unique(weight_loginfo$id)
 ```
+
+    ## [1] 8
 
 The timestamp attribute should be organized before checking how many
 days each file is.
 
-```{r message = FALSE}
+``` r
 # --- Organize time related variable
 daily_activity$activity_day <- mdy(daily_activity$activity_day)
 daily_calories$activity_day <- mdy(daily_calories$activity_day)
@@ -414,32 +940,130 @@ sleep_day$activity_day <- mdy_hms(sleep_day$activity_day, tz = Sys.timezone())
 weight_loginfo$activity_day <- mdy_hms(weight_loginfo$activity_day, tz = Sys.timezone())
 ```
 
-```{r message = FALSE}
+``` r
 n_unique(daily_activity$activity_day)
+```
+
+    ## [1] 31
+
+``` r
 n_unique(daily_calories$activity_day)
+```
+
+    ## [1] 31
+
+``` r
 n_unique(daily_intensities$activity_day)
+```
+
+    ## [1] 31
+
+``` r
 n_unique(daily_steps$activity_day)
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(heartrate_seconds$activity_second))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(hourly_calories$activity_hour))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(hourly_intensities$activity_hour))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(hourly_steps$activity_hour))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(minute_calories_narrow$activity_minute))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(minute_calories_wide$activity_hour))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(minute_intensities_narrow$activity_minute))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(minute_intensities_wide$activity_hour))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(minute_METs_narrow$activity_minute))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(minute_sleep$activity_minute))
+```
+
+    ## [1] 32
+
+``` r
 n_unique(date(minute_steps_narrow$activity_minute))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(minute_steps_wide$activity_hour))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(sleep_day$activity_day))
+```
+
+    ## [1] 31
+
+``` r
 n_unique(date(weight_loginfo$activity_day))
 ```
+
+    ## [1] 31
 
 The minute_sleep contains 32 days. After checking, that is because some
 user sleep before 12:00 AM, so the day 2016-04-11 is also included.
 
-```{r message = FALSE}
+``` r
 unique(date(minute_sleep$activity_minute))
+```
+
+    ##  [1] "2016-04-12" "2016-04-13" "2016-04-15" "2016-04-16" "2016-04-17"
+    ##  [6] "2016-04-19" "2016-04-20" "2016-04-21" "2016-04-23" "2016-04-24"
+    ## [11] "2016-04-25" "2016-04-26" "2016-04-28" "2016-04-29" "2016-04-30"
+    ## [16] "2016-05-01" "2016-05-02" "2016-05-03" "2016-05-05" "2016-05-06"
+    ## [21] "2016-05-07" "2016-05-08" "2016-05-09" "2016-05-10" "2016-05-11"
+    ## [26] "2016-04-14" "2016-04-11" "2016-04-18" "2016-04-22" "2016-04-27"
+    ## [31] "2016-05-04" "2016-05-12"
+
+``` r
 # minute_sleep[minute_sleep$activity_minute >= "2016-04-11" & minute_sleep$activity_minute < "2016-04-12",]
 ```
 
@@ -455,32 +1079,32 @@ and days
 
 ### Limitations
 
--   Lack of information about the user's gender, age, location
+-   Lack of information about the user’s gender, age, location
 
 ### ROCCC Check
 
 Check this dataset is good data or bad data
 
--   **R**eliable? *[Negative]*
-    -   The dataset is incomplete according to what we've observed.
+-   **R**eliable? *\[Negative\]*
+    -   The dataset is incomplete according to what we’ve observed.
     -   No idea about the sampled population. For example, the
         combination of men and women, the age range of the sample
         population.
-    -   The sample size is too small if we consider that Bellabeat's
+    -   The sample size is too small if we consider that Bellabeat’s
         market is women in North America.
--   **O**riginal? *[Negative]*
+-   **O**riginal? *\[Negative\]*
     -   The original dataset was generated via Amazon Mechanical Turk,
         but I could only rely on the zip files uploaded in
         [Zenodo](https://zenodo.org/record/53894#.ZCzLs3bML3H) by some
         researchers who may have conducted the survey.
--   **C**omprehensive? *[Negative]*
-    -   Without knowing the user's gender, we can't provide the analysis
+-   **C**omprehensive? *\[Negative\]*
+    -   Without knowing the user’s gender, we can’t provide the analysis
         based on females.
--   **C**urrent? *[Negative]*
+-   **C**urrent? *\[Negative\]*
     -   The survey was conducted in 2016 which may be out of date. User
         behavior might change as time goes on due to technological
         improvements.
--   **C**ited? *[Positive]*
+-   **C**ited? *\[Positive\]*
     -   The dataset was cited in the paper [Supporting users to take
         informed decisions on privacy settings of personal
         devices](https://link.springer.com/article/10.1007/s00779-017-1068-3),
@@ -492,7 +1116,7 @@ analysis process, we may need other data to support.
 
 ## Process
 
-In this part, we'll clean data and make it ready for analysis, and I
+In this part, we’ll clean data and make it ready for analysis, and I
 divide it into three steps. For easier reading, I add links to each
 subpart.
 
@@ -508,144 +1132,302 @@ overwhelming if we just want to check one thing. Here, I use is.na()
 instead to check for missing values, and then print out the location of
 the missing value in case I need to investigate the missing part later.
 
-```{r message = FALSE}
+``` r
 print("---------------- daily_activity ----------------")
+```
+
+    ## [1] "---------------- daily_activity ----------------"
+
+``` r
 if (sum(is.na(daily_activity)) != 0) {
     print("Position of missing values:")
     which(is.na(daily_activity))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- daily_calories ----------------")
+```
+
+    ## [1] "---------------- daily_calories ----------------"
+
+``` r
 if (sum(is.na(daily_calories)) != 0) {
     print("Position of missing values:")
     which(is.na(daily_calories))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- daily_intensities ----------------")
+```
+
+    ## [1] "---------------- daily_intensities ----------------"
+
+``` r
 if (sum(is.na(daily_intensities)) != 0) {
     print("Position of missing values:")
     which(is.na(daily_intensities))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- daily_steps ----------------")
+```
+
+    ## [1] "---------------- daily_steps ----------------"
+
+``` r
 if (sum(is.na(daily_steps)) != 0) {
     print("Position of missing values:")
     which(is.na(daily_steps))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- heartrate_seconds ----------------")
+```
+
+    ## [1] "---------------- heartrate_seconds ----------------"
+
+``` r
 if (sum(is.na(heartrate_seconds)) != 0) {
     print("Position of missing values:")
     which(is.na(heartrate_seconds))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- hourly_calories ----------------")
+```
+
+    ## [1] "---------------- hourly_calories ----------------"
+
+``` r
 if (sum(is.na(hourly_calories)) != 0) {
     print("Position of missing values:")
     which(is.na(hourly_calories))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- hourly_intensities ----------------")
+```
+
+    ## [1] "---------------- hourly_intensities ----------------"
+
+``` r
 if (sum(is.na(hourly_intensities)) != 0) {
     print("Position of missing values:")
     which(is.na(hourly_intensities))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- hourly_steps ----------------")
+```
+
+    ## [1] "---------------- hourly_steps ----------------"
+
+``` r
 if (sum(is.na(hourly_steps)) != 0) {
     print("Position of missing values:")
     which(is.na(hourly_steps))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- minute_calories_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_calories_narrow ----------------"
+
+``` r
 if (sum(is.na(minute_calories_narrow)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_calories_narrow))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- minute_calories_wide ----------------")
+```
+
+    ## [1] "---------------- minute_calories_wide ----------------"
+
+``` r
 if (sum(is.na(minute_calories_wide)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_calories_wide))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- minute_intensities_wide ----------------")
+```
+
+    ## [1] "---------------- minute_intensities_wide ----------------"
+
+``` r
 if (sum(is.na(minute_intensities_wide)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_intensities_wide))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- minute_intensities_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_intensities_narrow ----------------"
+
+``` r
 if (sum(is.na(minute_intensities_narrow)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_intensities_narrow))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- minute_METs_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_METs_narrow ----------------"
+
+``` r
 if (sum(is.na(minute_METs_narrow)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_METs_narrow))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- minute_sleep ----------------")
+```
+
+    ## [1] "---------------- minute_sleep ----------------"
+
+``` r
 if (sum(is.na(minute_sleep)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_sleep))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- minute_steps_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_steps_narrow ----------------"
+
+``` r
 if (sum(is.na(minute_steps_narrow)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_steps_narrow))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- minute_steps_wide ----------------")
+```
+
+    ## [1] "---------------- minute_steps_wide ----------------"
+
+``` r
 if (sum(is.na(minute_steps_wide)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_steps_wide))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- sleep_day ----------------")
+```
+
+    ## [1] "---------------- sleep_day ----------------"
+
+``` r
 if (sum(is.na(sleep_day)) != 0) {
     print("Position of missing values:")
     which(is.na(sleep_day))
 } else {
     print("No missing value")
 }
+```
 
+    ## [1] "No missing value"
+
+``` r
 print("---------------- weight_loginfo ----------------")
+```
+
+    ## [1] "---------------- weight_loginfo ----------------"
+
+``` r
 if (sum(is.na(weight_loginfo)) != 0) {
     print("Position of missing values:")
     which(is.na(weight_loginfo))
@@ -654,168 +1436,367 @@ if (sum(is.na(weight_loginfo)) != 0) {
 }
 ```
 
+    ## [1] "Position of missing values:"
+
+    ##  [1] 270 271 272 273 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289
+    ## [20] 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308
+    ## [39] 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327
+    ## [58] 328 329 330 331 332 333 334 335
+
 ### Check and Remove Duplicate
 
 Here I am using sleep_day as an example to check if there are duplicate
 rows, and if so, how can I make sure that these rows need to be deleted
 and is indeed deleted later.
 
-```{r}
+``` r
 duplicate_rows <- which(duplicated(sleep_day)) # Show the position of duplicate rows
 sleep_day[duplicate_rows,]
+```
+
+    ##             id activity_day total_sleep_records total_asleep_minutes
+    ## 162 4388161847   2016-05-05                   1                  471
+    ## 224 4702921684   2016-05-07                   1                  520
+    ## 381 8378563200   2016-04-25                   1                  388
+    ##     total_bedtime_minutes
+    ## 162                   495
+    ## 224                   543
+    ## 381                   402
+
+``` r
 sleep_day %>% filter_all(any_vars(. %in% c('471'))) # Filter out any value from the duplicate rows
+```
+
+    ##           id activity_day total_sleep_records total_asleep_minutes
+    ## 1 2347167796   2016-04-25                   1                  433
+    ## 2 4388161847   2016-05-05                   1                  471
+    ## 3 4388161847   2016-05-05                   1                  471
+    ## 4 5553957443   2016-05-02                   1                  409
+    ##   total_bedtime_minutes
+    ## 1                   471
+    ## 2                   495
+    ## 3                   495
+    ## 4                   471
+
+``` r
 rm(duplicate_rows) # Remove unused variables
 ```
 
 From the print out message, we know that these rows are really need to
 delete.
 
-```{r}
+``` r
 print("---------------- sleep_day ----------------")
+```
+
+    ## [1] "---------------- sleep_day ----------------"
+
+``` r
 if (nrow(sleep_day) == nrow(sleep_day %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   sleep_day <- sleep_day %>% distinct()
 }
+```
+
+    ## [1] "Remove duplicate rows"
+
+``` r
 # Check if there's no duplicate rows anymore
 print("Position of duplicated rows")
+```
+
+    ## [1] "Position of duplicated rows"
+
+``` r
 which(duplicated(sleep_day))
 ```
 
-We know that duplicate rows were successfully removed, so I'll repeat
+    ## integer(0)
+
+We know that duplicate rows were successfully removed, so I’ll repeat
 these steps for all data.
 
-```{r message = FALSE}
+``` r
 print("---------------- daily_activity ----------------")
+```
+
+    ## [1] "---------------- daily_activity ----------------"
+
+``` r
 if (nrow(daily_activity) == nrow(daily_activity %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   daily_activity <- daily_activity %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- daily_calories ----------------")
+```
+
+    ## [1] "---------------- daily_calories ----------------"
+
+``` r
 if (nrow(daily_calories) == nrow(daily_calories %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   daily_calories <- daily_calories %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- daily_intensities ----------------")
+```
+
+    ## [1] "---------------- daily_intensities ----------------"
+
+``` r
 if (nrow(daily_intensities) == nrow(daily_intensities %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   daily_intensities <- daily_intensities %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- daily_steps ----------------")
+```
+
+    ## [1] "---------------- daily_steps ----------------"
+
+``` r
 if (nrow(daily_steps) == nrow(daily_steps %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   daily_steps <- daily_steps %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- heartrate_seconds ----------------")
+```
+
+    ## [1] "---------------- heartrate_seconds ----------------"
+
+``` r
 if (nrow(heartrate_seconds) == nrow(heartrate_seconds %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   heartrate_seconds <- heartrate_seconds %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- hourly_calories ----------------")
+```
+
+    ## [1] "---------------- hourly_calories ----------------"
+
+``` r
 if (nrow(hourly_calories) == nrow(hourly_calories %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   hourly_calories <- hourly_calories %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- hourly_intensities ----------------")
+```
+
+    ## [1] "---------------- hourly_intensities ----------------"
+
+``` r
 if (nrow(hourly_intensities) == nrow(hourly_intensities %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   hourly_intensities <- hourly_intensities %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- hourly_steps ----------------")
+```
+
+    ## [1] "---------------- hourly_steps ----------------"
+
+``` r
 if (nrow(hourly_steps) == nrow(hourly_steps %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   hourly_steps <- hourly_steps %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- minute_calories_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_calories_narrow ----------------"
+
+``` r
 if (nrow(minute_calories_narrow) == nrow(minute_calories_narrow %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_calories_narrow <- minute_calories_narrow %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- minute_calories_wide ----------------")
+```
+
+    ## [1] "---------------- minute_calories_wide ----------------"
+
+``` r
 if (nrow(minute_calories_wide) == nrow(minute_calories_wide %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_calories_wide <- minute_calories_wide %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- minute_intensities_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_intensities_narrow ----------------"
+
+``` r
 if (nrow(minute_intensities_narrow) == nrow(minute_intensities_narrow %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_intensities_narrow <- minute_intensities_narrow %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- minute_intensities_wide ----------------")
+```
+
+    ## [1] "---------------- minute_intensities_wide ----------------"
+
+``` r
 if (nrow(minute_intensities_wide) == nrow(minute_intensities_wide %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_intensities_wide <- minute_intensities_wide %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- minute_METs_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_METs_narrow ----------------"
+
+``` r
 if (nrow(minute_METs_narrow) == nrow(minute_METs_narrow %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_METs_narrow <- minute_METs_narrow %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- minute_sleep ----------------")
+```
+
+    ## [1] "---------------- minute_sleep ----------------"
+
+``` r
 if (nrow(minute_sleep) == nrow(minute_sleep %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_sleep <- minute_sleep %>% distinct()
 }
+```
 
+    ## [1] "Remove duplicate rows"
+
+``` r
 print("---------------- minute_steps_narrow ----------------")
+```
+
+    ## [1] "---------------- minute_steps_narrow ----------------"
+
+``` r
 if (nrow(minute_steps_narrow) == nrow(minute_steps_narrow %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_steps_narrow <- minute_steps_narrow %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- minute_steps_wide ----------------")
+```
+
+    ## [1] "---------------- minute_steps_wide ----------------"
+
+``` r
 if (nrow(minute_steps_wide) == nrow(minute_steps_wide %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_steps_wide <- minute_steps_wide %>% distinct()
 }
+```
 
+    ## [1] "No duplicate rows"
+
+``` r
 print("---------------- weight_loginfo ----------------")
+```
+
+    ## [1] "---------------- weight_loginfo ----------------"
+
+``` r
 if (nrow(weight_loginfo) == nrow(weight_loginfo %>% distinct())) {
   print("No duplicate rows")
 } else {
@@ -824,53 +1805,134 @@ if (nrow(weight_loginfo) == nrow(weight_loginfo %>% distinct())) {
 }
 ```
 
+    ## [1] "No duplicate rows"
+
 ### Check Equality
 
-It's easy to find out that some attributes seem to be the same among
-different files. So I'll try to investigate the similarity of values.
+It’s easy to find out that some attributes seem to be the same among
+different files. So I’ll try to investigate the similarity of values.
 For example, if I know that the value of attributes in daily_calories,
 daily_intensities, and daily_steps is actually the same as those
 attributes in daily_activity, then I can just focus on daily_activity.
 
-```{r message = FALSE}
+``` r
 # --- Check if data are the same
 ## daily_activity vs. daily_calories
 identical(daily_activity$id, daily_calories$id)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$activity_day, daily_calories$activity_day)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$calories, daily_calories$calories)
+```
+
+    ## [1] TRUE
+
+``` r
 ## daily_activity vs. daily_steps
 identical(daily_activity$id, daily_steps$id)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$activity_day, daily_steps$activity_day)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$total_steps, daily_steps$total_steps)
+```
+
+    ## [1] TRUE
+
+``` r
 ## daily_activity vs. daily_intensities
 identical(daily_activity$id, daily_intensities$id)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$activity_day, daily_intensities$activity_day)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$sedentary_minutes, daily_intensities$sedentary_minutes)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$light_active_minutes, daily_intensities$light_active_minutes)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$moderate_active_minutes, daily_intensities$moderate_active_minutes)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$very_active_minutes, daily_intensities$very_active_minutes)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$sedentary_active_distance, daily_intensities$sedentary_active_distance)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$light_active_distance, daily_intensities$light_active_distance)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$moderate_active_distance, daily_intensities$moderate_active_distance)
+```
+
+    ## [1] TRUE
+
+``` r
 identical(daily_activity$very_active_distance, daily_intensities$very_active_distance)
 ```
 
-And I'm also curious whether or not the user ids of two sleep-related
+    ## [1] TRUE
+
+And I’m also curious whether or not the user ids of two sleep-related
 data is the same.
 
-```{r}
+``` r
 identical(unique(minute_sleep$id), unique(sleep_day$id))
 ```
+
+    ## [1] TRUE
 
 ## Analyze
 
 I want to know how users interact with their smartwatches. Here are some
 points I think of before we dive into analysis.
 
--   What are the user's exercise habits? In the morning? weekdays? Or
+-   What are the user’s exercise habits? In the morning? weekdays? Or
     weekend?
 -   How many people really devote themselves to sports? And, how many
-    people don't?
+    people don’t?
 -   Does exercise habbits affect sleep quality? But the sleep-related
     data are incomplete, there might be some problems.
 
@@ -878,8 +1940,8 @@ points I think of before we dive into analysis.
 missing values, I cannot study the relationship between exercise
 intensity and weight loss.*
 
-First, I'll try to print out some basic charts that may (or may not)
-lead me to something I haven't thought of. Below are quick links to each
+First, I’ll try to print out some basic charts that may (or may not)
+lead me to something I haven’t thought of. Below are quick links to each
 chart.
 
 -   [Correlation Between Attributes](#Correlation-Between-Attributes)
@@ -905,12 +1967,12 @@ chart.
 
 ### Correlation Between Attributes
 
-I'll check the attributes in each file and pick two of them that might
+I’ll check the attributes in each file and pick two of them that might
 have correlation to check.
 
 #### Chart 1: Correlation Between Steps and Calories
 
-```{r}
+``` r
 # --- Calories and steps
 ggplot(data = daily_activity, aes(x = total_steps, y = calories)) + 
   geom_point(colour = "#6BA292", alpha = 0.5, size = 3) +
@@ -918,6 +1980,10 @@ ggplot(data = daily_activity, aes(x = total_steps, y = calories)) +
   theme_minimal() +
   labs(x = "Steps", y = "Calories", title = "Correlation Between Steps and Calories", subtitle = "Daily", captions = "")
 ```
+
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 > **Findings in Chart 1**
 >
@@ -951,15 +2017,15 @@ as the thresholds of moderate-intensity and vigorous-intensity total
 minutes. One more thing to be mentioned, R will take scientific notation
 to express the attribute id, like [this
 question](https://stackoverflow.com/questions/5352099/how-can-i-disable-scientific-notation)
-asked in stackoverflow. This will cause problem when I'm using id as x
+asked in stackoverflow. This will cause problem when I’m using id as x
 or y axis. Thus, we have to format id before use.
 
-```{r}
+``` r
 ## Avoid id is expressed as scientific notation
 daily_activity$id <- format(daily_activity$id, scientific = FALSE)
 ```
 
-```{r}
+``` r
 # --- Active minutes
 vigorous_month <- 321.428571 # 75 min / 7 days a week * 30 days
 moderate_month <- 642.857143 # 150 min / 7 days a week * 30 days
@@ -989,8 +2055,9 @@ ggplot(data = daily_active_sum_by_user, aes(x = id, y = value, fill = active_lvl
   theme_minimal() +
   scale_fill_manual('Active Level', values = c('#DEE5DE', '#6BA292')) +
   labs(x = "ID", y = "Active Minutes", title = "Total Active Minutes", subtitle = "2016-04-12 to 2016-05-12", captions = "")
-
 ```
+
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
 > **Findings in Chart 2**
 >
@@ -1005,11 +2072,11 @@ ggplot(data = daily_active_sum_by_user, aes(x = id, y = value, fill = active_lvl
 -   Or it can be the average sleep time of all users grouped by days of
     the week.
 
-I will use the last one to see users' sleep patterns based on the
+I will use the last one to see users’ sleep patterns based on the
 weekday. Thus, I have to know the days of the week by time-related
 attribute in the file.
 
-```{r}
+``` r
 # --- Add weekly message 
 ## Make sure the order of the results is day_labs and not alphabetical
 day_labs <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday") 
@@ -1017,7 +2084,7 @@ sleep_day$weekday_info <- weekdays(sleep_day$activity_day)
 sleep_day$weekday_info <- factor(sleep_day$weekday_info, levels = day_labs)
 ```
 
-```{r}
+``` r
 ## Crate data frame for asleep_time and bedtime
 asleep_time_weekly <- sleep_day %>% 
   group_by(weekday_info) %>% 
@@ -1041,6 +2108,8 @@ ggplot(data = sleep_weekly, aes(x = weekday_info, y = mean, fill = lable)) +
   labs(x = "Weekday", y = "Average Sleep Minutes", title = "Average Sleep Minutes Weekly", subtitle = "2016-04-12 to 2016-05-12", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+
 > **Findings in Chart 3**
 >
 > -   Both the average asleep minutes and bedtime minutes are the
@@ -1051,17 +2120,17 @@ ggplot(data = sleep_weekly, aes(x = weekday_info, y = mean, fill = lable)) +
 
 #### Chart 4: Average Activity Minutes
 
-As chart 3, I'm going to see the active minutes by days of the week to
-investigate if there's any relationship between active minutes and
+As chart 3, I’m going to see the active minutes by days of the week to
+investigate if there’s any relationship between active minutes and
 weekdays.
 
-```{r}
+``` r
 # --- Add weekly message 
 daily_activity$weekday_info <- weekdays(daily_activity$activity_day)
 daily_activity$weekday_info <- factor(daily_activity$weekday_info, levels = day_labs) # order weekday
 ```
 
-```{r}
+``` r
 # Create data frame for average very_active, moderate_active, and light_active minutes
 very_active_minutes_weekly <- daily_activity %>% 
   group_by(weekday_info) %>% 
@@ -1091,8 +2160,9 @@ ggplot(data = avg_active_minutes_weekly, aes(x = weekday_info, y = active_minute
   theme_minimal() +
   scale_fill_manual('Active Level', values = c('#DEE5DE','#FFDC7C', '#6BA292')) +
   labs(x = "Weekday", y = "Average Active Minutes", title = "Average Active Minutes Weekly", subtitle = "2016-04-12 to 2016-05-12", captions = "")
-
 ```
+
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 > **Findings in Chart 4**
 >
@@ -1115,12 +2185,12 @@ We have hourly data for calories, intensity and steps, which have a
 positive correlation, I mean when high intensity occurs, higher calories
 can be expected. Here, I only plot the average intensities hourly.
 
-```{r}
+``` r
 # --- Extract hh:mm in the attribute activity_hour
 hourly_intensities$time_info <- format(hourly_intensities$activity_hour, format = "%H:%M")
 ```
 
-```{r}
+``` r
 avg_intensity_hour <- hourly_intensities %>% 
   group_by(time_info) %>% 
   summarise_at(vars(total_intensities), list(intensity_mean = mean))
@@ -1132,6 +2202,8 @@ ggplot(data = avg_intensity_hour, aes(x = hours, y = intensity_mean)) +
   labs(x = "Hours", y = "Average Intensities", title = "Average Intensities Hourly", subtitle = "All users from 2016-04-12 to 2016-05-12", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+
 > **Findings in Chart 5**
 >
 > -   Average intensities rise at 17:00 and reach the peak at 18:00,
@@ -1139,9 +2211,9 @@ ggplot(data = avg_intensity_hour, aes(x = hours, y = intensity_mean)) +
 
 ### Something More to Analyze
 
-Now, let's circle back to some question I list above
+Now, let’s circle back to some question I list above
 
--   User's exercise habits in a day and in a week? Vigorous or moderate?
+-   User’s exercise habits in a day and in a week? Vigorous or moderate?
 -   The composition of the people regarding the frequency of exercise?
 -   Does exercise intensity affect sleep quality?
 
@@ -1153,7 +2225,7 @@ that the higher the number of active minutes, the higher the rating
 assigned to the user. Given that only four groups are being used to
 categorize users, an upperbound for the value grading would be set.
 
-```{r}
+``` r
 # See code in chart 2 to see how I got the number grading
 active_grading <- daily_active_sum_by_user %>% 
   group_by(id) %>% 
@@ -1169,7 +2241,7 @@ group_size$percentages <- percent(group_size$Freq/sum(group_size$Freq))
 group_size$lable <- c("0: Deficient", "1: Passable", "2: Good", "3: Excellent")
 ```
 
-```{r}
+``` r
 ggplot(group_size, aes(x = "", y = Freq, fill = lable)) +
   geom_bar(stat = "identity", width = 2, color = "white") +
   coord_polar("y", start = 0) +
@@ -1181,6 +2253,8 @@ ggplot(group_size, aes(x = "", y = Freq, fill = lable)) +
   labs(title = "Classification of Users Based on Physical Activity", subtitle = "According to very active and moderate active minutes of 33 users", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
+
 > **Findings in Chart 6**
 >
 > -   Almost half of the users are less physically active than the WHO
@@ -1191,15 +2265,15 @@ ggplot(group_size, aes(x = "", y = Freq, fill = lable)) +
 
 #### Chart 7: MET Value for the Day of the Week
 
-Here, I'll investigate the MET values to see if there are any clues to
-the user's exercise habits. Also, it may be able to know what kind of
+Here, I’ll investigate the MET values to see if there are any clues to
+the user’s exercise habits. Also, it may be able to know what kind of
 exercise the user likes to do by [MET activity
 table](https://community.plu.edu/~chasega/met.html). *Note: The MET
 value has been multiplied by 10 in the dataset according to the
 [document](https://www.fitabase.com/media/1748/fitabasedatadictionary.pdf)
 released by Fitbit*
 
-```{r}
+``` r
 # --- Extract hh:mm in the attribute activity_minute
 minute_METs_narrow$time_info <- format(minute_METs_narrow$activity_minute, format = "%H:%M")
 minute_METs_narrow$time_info <- as.POSIXct(minute_METs_narrow$time_info, format = "%H:%M")
@@ -1209,16 +2283,21 @@ minute_METs_narrow$weekday_info <- weekdays(minute_METs_narrow$activity_minute)
 minute_METs_narrow$weekday_info <- factor(minute_METs_narrow$weekday_info, levels = day_labs)
 ```
 
-*Note: This part could take some time since I'll plot every value in the
+*Note: This part could take some time since I’ll plot every value in the
 file minute_METs_narrow*
 
-```{r}
+``` r
 ggplot(data = minute_METs_narrow, aes(x = time_info, y = MET, group = as.Date(activity_minute))) + 
   geom_point(colour = "#6BA292", alpha = 0.1, size = 0.5) + 
   facet_grid(weekday_info ~.) +
   theme_minimal() +
   scale_x_datetime(breaks = date_breaks("2 hour"), labels = date_format("%H:%M")) +
   labs(x = "Hours", y = "MET Value (*10)", title = "MET Values in a Day", subtitle = "", captions = "")
+```
+
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
+
+``` r
 # Make sure the scale lib has been load!!
 # time_info has to be class POSIXct and has to be transformed before using ggplot
 ```
@@ -1243,7 +2322,7 @@ know more like which group of people tend to exercise in the morning
 
 #### Chart 8: MET Value for the Day of the Week by Groups
 
-```{r}
+``` r
 minute_METs_narrow_merge_grading <- merge(x = minute_METs_narrow, 
                                           y = active_grading[, c("id", "grading")], 
                                           by = "id", all.x = TRUE)
@@ -1259,7 +2338,7 @@ minute_METs_g3 <- minute_METs_narrow_merge_grading %>%
 
 **Group 0**
 
-```{r}
+``` r
 ggplot(data = minute_METs_g0, aes(x = time_info, y = MET, group = as.Date(activity_minute))) +
   geom_point(colour = "#6BA292", alpha = 0.1, size = 0.5) +
   facet_grid(weekday_info ~.) +
@@ -1268,9 +2347,11 @@ ggplot(data = minute_METs_g0, aes(x = time_info, y = MET, group = as.Date(activi
   labs(x = "Hours", y = "MET Value (*10)", title = "MET Values in a Day", subtitle = "Group 0", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+
 **Group 1**
 
-```{r}
+``` r
 ggplot(data = minute_METs_g1, aes(x = time_info, y = MET, group = as.Date(activity_minute))) +
   geom_point(colour = "#6BA292", alpha = 0.1, size = 0.5) +
   facet_grid(weekday_info ~.) +
@@ -1279,9 +2360,11 @@ ggplot(data = minute_METs_g1, aes(x = time_info, y = MET, group = as.Date(activi
   labs(x = "Hours", y = "MET Value (*10)", title = "MET Values in a Day", subtitle = "Group 1", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
+
 **Group 2**
 
-```{r}
+``` r
 ggplot(data = minute_METs_g2, aes(x = time_info, y = MET, group = as.Date(activity_minute))) +
   geom_point(colour = "#6BA292", alpha = 0.1, size = 0.5) +
   facet_grid(weekday_info ~.) +
@@ -1290,9 +2373,11 @@ ggplot(data = minute_METs_g2, aes(x = time_info, y = MET, group = as.Date(activi
   labs(x = "Hours", y = "MET Value (*10)", title = "MET Values in a Day", subtitle = "Group 2", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+
 **Group 3**
 
-```{r}
+``` r
 ggplot(data = minute_METs_g3, aes(x = time_info, y = MET, group = as.Date(activity_minute))) +
   geom_point(colour = "#6BA292", alpha = 0.1, size = 0.5) +
   facet_grid(weekday_info ~.) +
@@ -1300,6 +2385,8 @@ ggplot(data = minute_METs_g3, aes(x = time_info, y = MET, group = as.Date(activi
   scale_x_datetime(breaks = date_breaks("2 hour"), labels = date_format("%H:%M")) +
   labs(x = "Hours", y = "MET Value (*10)", title = "MET Values in a Day", subtitle = "Group 3", captions = "")
 ```
+
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 > **Findings in Chart 8** (4 plots)
 >
@@ -1324,7 +2411,7 @@ intensities like chart 5 in groups.
 
 **Group 0**
 
-```{r}
+``` r
 hourly_intensities_merge_grading <- merge(x = hourly_intensities, y = active_grading[, c("id", "grading")], by = "id", all.x = TRUE)
 avg_intensity_hour_g0 <- hourly_intensities_merge_grading %>% 
   filter(grading == "0") %>%
@@ -1337,9 +2424,11 @@ ggplot(data = avg_intensity_hour_g0, aes(x = hours, y = intensity_mean)) +
   labs(x = "Hours", y = "Average Intensities of Group 0", title = "Average Intensities of Group 0 Hourly", subtitle = "2016-04-12 to 2016-05-12 of users from group 0", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+
 **Group 1**
 
-```{r}
+``` r
 avg_intensity_hour_g1 <- hourly_intensities_merge_grading %>% 
   filter(grading == "1") %>%
   group_by(time_info) %>% 
@@ -1351,9 +2440,11 @@ ggplot(data = avg_intensity_hour_g1, aes(x = hours, y = intensity_mean)) +
   labs(x = "Hours", y = "Average Intensities of Group 1", title = "Average Intensities of Group 1 Hourly", subtitle = "2016-04-12 to 2016-05-12 of users from group 1", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+
 **Group 2**
 
-```{r}
+``` r
 avg_intensity_hour_g2 <- hourly_intensities_merge_grading %>% 
   filter(grading == "2") %>%
   group_by(time_info) %>% 
@@ -1365,9 +2456,11 @@ ggplot(data = avg_intensity_hour_g2, aes(x = hours, y = intensity_mean)) +
   labs(x = "Hours", y = "Average Intensities of Group 2", title = "Average Intensities of Group 2 Hourly", subtitle = "2016-04-12 to 2016-05-12 of users from group 2", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
+
 **Group 3**
 
-```{r}
+``` r
 avg_intensity_hour_g3 <- hourly_intensities_merge_grading %>% 
   filter(grading == "3") %>%
   group_by(time_info) %>% 
@@ -1379,12 +2472,14 @@ ggplot(data = avg_intensity_hour_g3, aes(x = hours, y = intensity_mean)) +
   labs(x = "Hours", y = "Average Intensities of Group 3", title = "Average Intensities of Group 3 Hourly", subtitle = "2016-04-12 to 2016-05-12 of users from group 3", captions = "")
 ```
 
+![](bellabeat-case-study_files/figure-gfm/unnamed-chunk-36-1.png)<!-- -->
+
 # Summary
 
 **Some insights about different groups**
 
 | Group | Summary                                                                                                                                          | Note                                                                                                                                                               |
-|------------------------|------------------------|------------------------|
+|-------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 0     | • People might do vigorous activities on the weekend morning <br> • Possibly poor sleep quality                                                  | • Only 2 patterns are found on weekend morning with high MET values, but patterns are short and light(low density) <br>• MET values are still high during midnight |
 | 1     | • People might prefer vigorous activities when exercising in the daytime and do moderate activities around dinner time <br> • Good sleep quality | • More regular physical patterns are found, most happen on Wed, Sat, and Sun <br>• MET values are almost zero during midnight                                      |
 | 2     | • More users exercise at the same period <br>• Users might not prefer vigorous activities <br>• Good sleep quality                               | • The density of each pattern is much more obvious than group 0 and 1<br>• The MET value of regular patterns are lower than group 0 and 1                          |
@@ -1407,13 +2502,13 @@ ggplot(data = avg_intensity_hour_g3, aes(x = hours, y = intensity_mean)) +
     target audience.
 -   Group 3: More likely to want a device that would allow them to
     exercise without their smartphones and might need the device to be
-    waterproof, which is not Bellabeat's goal.
+    waterproof, which is not Bellabeat’s goal.
 
 **Others**
 
 -   In this dataset, we do not see that exercise habits affect sleep
     quality.
--   Most users probably don't wear their Fitbit device while they sleep.
+-   Most users probably don’t wear their Fitbit device while they sleep.
 -   Users may need to upload weight info manually.
 
 # Recommendation
@@ -1464,7 +2559,7 @@ ggplot(data = avg_intensity_hour_g3, aes(x = hours, y = intensity_mean)) +
 **How** (Need more discussion)
 
 -   There are tons of ways to reward users, and that depends on the
-    annual budget of Bellabeat. For example, when a user's wellness
+    annual budget of Bellabeat. For example, when a user’s wellness
     score reaches 90 points for more than 7 days in a row, she can get a
     free yoga class.
 
@@ -1484,20 +2579,20 @@ ggplot(data = avg_intensity_hour_g3, aes(x = hours, y = intensity_mean)) +
 -   Most people might feel uncomfortable wearing wrist-wear devices
     while sleeping.
 -   Those who sleep with a watch on may have no problem wearing a Fitbit
-    smartwatch to bed. But for Bellabeat's TA, they may not even be used
+    smartwatch to bed. But for Bellabeat’s TA, they may not even be used
     to a watch, let alone wear a smart device while sleeping.
 
 **How**
 
 -   Improve the experience of wearing the device.
--   Or track users' sleeping status by smartphone and Bellabeat's app
-    instead of using the tracker, so users don't have to wear the device
+-   Or track users’ sleeping status by smartphone and Bellabeat’s app
+    instead of using the tracker, so users don’t have to wear the device
     while sleeping.
 
 **Design Concepts**
 
 -   For the second suggestion, maybe Bellabeat can cooperate with some
-    developers that focus on tracking users' sleeping status through
+    developers that focus on tracking users’ sleeping status through
     smartphones.
 
 **Shortages**
