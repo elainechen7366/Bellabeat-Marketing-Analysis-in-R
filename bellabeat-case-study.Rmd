@@ -50,8 +50,9 @@ Although there are many Bellabeat products, based on the forecast of
 research](https://www.grandviewresearch.com/industry-analysis/wearable-technology-market),
 the wrist-wear device will dominate the wearable technology market now
 and after. Thus, I’ll focus on the wrist-wear devices when making the
-comparison of Bellabeat and its competitive products. **Target
-Audience**
+comparison of Bellabeat and its competitive products. 
+
+**Target Audience**
 
 > I make a guess about the customer portfolio according to the website
 > of [Bellabeat](https://bellabeat.com/).
@@ -153,7 +154,7 @@ library("tidyverse")
 library("skimr")
 ```
 
-```{r message = FALSE}
+```{r echo=TRUE, results='hide'}
 # --- Load files
 daily_activity <- read.csv("Data/dailyActivity_merged.csv")
 daily_calories <- read.csv("Data/dailyCalories_merged.csv")
@@ -178,7 +179,7 @@ weight_loginfo <- read.csv("Data/weightLogInfo_merged.csv")
 In the following section, I'll check the file structure and then rename
 attributes the way I want.
 
-```{r message = FALSE}
+```{r echo=TRUE, results='hide'}
 print("---------------- daily_activity ----------------")
 glimpse(daily_activity)
 print("---------------- daily_calories ----------------")
@@ -365,7 +366,7 @@ names(weight_loginfo)[names(weight_loginfo) == "LogId"] <- "log_id"
 Now, the first question that comes to my mind is how many user ids and
 how many days are recorded in each file.
 
-```{r message = FALSE}
+```{r echo=TRUE, results='hide'}
 n_unique(daily_activity$id)
 n_unique(daily_calories$id)
 n_unique(daily_intensities$id)
@@ -414,7 +415,7 @@ sleep_day$activity_day <- mdy_hms(sleep_day$activity_day, tz = Sys.timezone())
 weight_loginfo$activity_day <- mdy_hms(weight_loginfo$activity_day, tz = Sys.timezone())
 ```
 
-```{r message = FALSE}
+```{r echo=TRUE, results='hide'}
 n_unique(daily_activity$activity_day)
 n_unique(daily_calories$activity_day)
 n_unique(daily_intensities$activity_day)
@@ -438,7 +439,7 @@ n_unique(date(weight_loginfo$activity_day))
 The minute_sleep contains 32 days. After checking, that is because some
 user sleep before 12:00 AM, so the day 2016-04-11 is also included.
 
-```{r message = FALSE}
+```{r echo=TRUE, results='hide'}
 unique(date(minute_sleep$activity_minute))
 # minute_sleep[minute_sleep$activity_minute >= "2016-04-11" & minute_sleep$activity_minute < "2016-04-12",]
 ```
@@ -508,7 +509,7 @@ overwhelming if we just want to check one thing. Here, I use is.na()
 instead to check for missing values, and then print out the location of
 the missing value in case I need to investigate the missing part later.
 
-```{r message = FALSE}
+```{r echo=TRUE, results='hide'}
 print("---------------- daily_activity ----------------")
 if (sum(is.na(daily_activity)) != 0) {
     print("Position of missing values:")
@@ -686,7 +687,7 @@ which(duplicated(sleep_day))
 We know that duplicate rows were successfully removed, so I'll repeat
 these steps for all data.
 
-```{r message = FALSE}
+```{r echo=TRUE, results='hide'}
 print("---------------- daily_activity ----------------")
 if (nrow(daily_activity) == nrow(daily_activity %>% distinct())) {
   print("No duplicate rows")
@@ -832,7 +833,7 @@ For example, if I know that the value of attributes in daily_calories,
 daily_intensities, and daily_steps is actually the same as those
 attributes in daily_activity, then I can just focus on daily_activity.
 
-```{r message = FALSE}
+```{r echo=TRUE, results='hide'}
 # --- Check if data are the same
 ## daily_activity vs. daily_calories
 identical(daily_activity$id, daily_calories$id)

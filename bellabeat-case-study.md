@@ -45,8 +45,9 @@ Although there are many Bellabeat products, based on the forecast of
 research](https://www.grandviewresearch.com/industry-analysis/wearable-technology-market),
 the wrist-wear device will dominate the wearable technology market now
 and after. Thus, I’ll focus on the wrist-wear devices when making the
-comparison of Bellabeat and its competitive products. **Target
-Audience**
+comparison of Bellabeat and its competitive products.
+
+**Target Audience**
 
 > I make a guess about the customer portfolio according to the website
 > of [Bellabeat](https://bellabeat.com/).
@@ -165,496 +166,42 @@ attributes the way I want.
 
 ``` r
 print("---------------- daily_activity ----------------")
-```
-
-    ## [1] "---------------- daily_activity ----------------"
-
-``` r
 glimpse(daily_activity)
-```
-
-    ## Rows: 940
-    ## Columns: 15
-    ## $ Id                       <dbl> 1503960366, 1503960366, 1503960366, 150396036…
-    ## $ ActivityDate             <chr> "4/12/2016", "4/13/2016", "4/14/2016", "4/15/…
-    ## $ TotalSteps               <int> 13162, 10735, 10460, 9762, 12669, 9705, 13019…
-    ## $ TotalDistance            <dbl> 8.50, 6.97, 6.74, 6.28, 8.16, 6.48, 8.59, 9.8…
-    ## $ TrackerDistance          <dbl> 8.50, 6.97, 6.74, 6.28, 8.16, 6.48, 8.59, 9.8…
-    ## $ LoggedActivitiesDistance <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ VeryActiveDistance       <dbl> 1.88, 1.57, 2.44, 2.14, 2.71, 3.19, 3.25, 3.5…
-    ## $ ModeratelyActiveDistance <dbl> 0.55, 0.69, 0.40, 1.26, 0.41, 0.78, 0.64, 1.3…
-    ## $ LightActiveDistance      <dbl> 6.06, 4.71, 3.91, 2.83, 5.04, 2.51, 4.71, 5.0…
-    ## $ SedentaryActiveDistance  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ VeryActiveMinutes        <int> 25, 21, 30, 29, 36, 38, 42, 50, 28, 19, 66, 4…
-    ## $ FairlyActiveMinutes      <int> 13, 19, 11, 34, 10, 20, 16, 31, 12, 8, 27, 21…
-    ## $ LightlyActiveMinutes     <int> 328, 217, 181, 209, 221, 164, 233, 264, 205, …
-    ## $ SedentaryMinutes         <int> 728, 776, 1218, 726, 773, 539, 1149, 775, 818…
-    ## $ Calories                 <int> 1985, 1797, 1776, 1745, 1863, 1728, 1921, 203…
-
-``` r
 print("---------------- daily_calories ----------------")
-```
-
-    ## [1] "---------------- daily_calories ----------------"
-
-``` r
 glimpse(daily_calories)
-```
-
-    ## Rows: 940
-    ## Columns: 3
-    ## $ Id          <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960366…
-    ## $ ActivityDay <chr> "4/12/2016", "4/13/2016", "4/14/2016", "4/15/2016", "4/16/…
-    ## $ Calories    <int> 1985, 1797, 1776, 1745, 1863, 1728, 1921, 2035, 1786, 1775…
-
-``` r
 print("---------------- daily_intensities ----------------")
-```
-
-    ## [1] "---------------- daily_intensities ----------------"
-
-``` r
 glimpse(daily_intensities)
-```
-
-    ## Rows: 940
-    ## Columns: 10
-    ## $ Id                       <dbl> 1503960366, 1503960366, 1503960366, 150396036…
-    ## $ ActivityDay              <chr> "4/12/2016", "4/13/2016", "4/14/2016", "4/15/…
-    ## $ SedentaryMinutes         <int> 728, 776, 1218, 726, 773, 539, 1149, 775, 818…
-    ## $ LightlyActiveMinutes     <int> 328, 217, 181, 209, 221, 164, 233, 264, 205, …
-    ## $ FairlyActiveMinutes      <int> 13, 19, 11, 34, 10, 20, 16, 31, 12, 8, 27, 21…
-    ## $ VeryActiveMinutes        <int> 25, 21, 30, 29, 36, 38, 42, 50, 28, 19, 66, 4…
-    ## $ SedentaryActiveDistance  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ LightActiveDistance      <dbl> 6.06, 4.71, 3.91, 2.83, 5.04, 2.51, 4.71, 5.0…
-    ## $ ModeratelyActiveDistance <dbl> 0.55, 0.69, 0.40, 1.26, 0.41, 0.78, 0.64, 1.3…
-    ## $ VeryActiveDistance       <dbl> 1.88, 1.57, 2.44, 2.14, 2.71, 3.19, 3.25, 3.5…
-
-``` r
 print("---------------- daily_steps ----------------")
-```
-
-    ## [1] "---------------- daily_steps ----------------"
-
-``` r
 glimpse(daily_steps)
-```
-
-    ## Rows: 940
-    ## Columns: 3
-    ## $ Id          <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960366…
-    ## $ ActivityDay <chr> "4/12/2016", "4/13/2016", "4/14/2016", "4/15/2016", "4/16/…
-    ## $ StepTotal   <int> 13162, 10735, 10460, 9762, 12669, 9705, 13019, 15506, 1054…
-
-``` r
 print("---------------- heartrate_seconds ----------------")
-```
-
-    ## [1] "---------------- heartrate_seconds ----------------"
-
-``` r
 glimpse(heartrate_seconds)
-```
-
-    ## Rows: 2,483,658
-    ## Columns: 3
-    ## $ Id    <dbl> 2022484408, 2022484408, 2022484408, 2022484408, 2022484408, 2022…
-    ## $ Time  <chr> "4/12/2016 7:21:00 AM", "4/12/2016 7:21:05 AM", "4/12/2016 7:21:…
-    ## $ Value <int> 97, 102, 105, 103, 101, 95, 91, 93, 94, 93, 92, 89, 83, 61, 60, …
-
-``` r
 print("---------------- hourly_calories ----------------")
-```
-
-    ## [1] "---------------- hourly_calories ----------------"
-
-``` r
 glimpse(hourly_calories)
-```
-
-    ## Rows: 22,099
-    ## Columns: 3
-    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
-    ## $ ActivityHour <chr> "4/12/2016 12:00:00 AM", "4/12/2016 1:00:00 AM", "4/12/20…
-    ## $ Calories     <int> 81, 61, 59, 47, 48, 48, 48, 47, 68, 141, 99, 76, 73, 66, …
-
-``` r
 print("---------------- hourly_intensities ----------------")
-```
-
-    ## [1] "---------------- hourly_intensities ----------------"
-
-``` r
 glimpse(hourly_intensities)
-```
-
-    ## Rows: 22,099
-    ## Columns: 4
-    ## $ Id               <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 15039…
-    ## $ ActivityHour     <chr> "4/12/2016 12:00:00 AM", "4/12/2016 1:00:00 AM", "4/1…
-    ## $ TotalIntensity   <int> 20, 8, 7, 0, 0, 0, 0, 0, 13, 30, 29, 12, 11, 6, 36, 5…
-    ## $ AverageIntensity <dbl> 0.333333, 0.133333, 0.116667, 0.000000, 0.000000, 0.0…
-
-``` r
 print("---------------- hourly_steps ----------------")
-```
-
-    ## [1] "---------------- hourly_steps ----------------"
-
-``` r
 glimpse(hourly_steps)
-```
-
-    ## Rows: 22,099
-    ## Columns: 3
-    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
-    ## $ ActivityHour <chr> "4/12/2016 12:00:00 AM", "4/12/2016 1:00:00 AM", "4/12/20…
-    ## $ StepTotal    <int> 373, 160, 151, 0, 0, 0, 0, 0, 250, 1864, 676, 360, 253, 2…
-
-``` r
 print("---------------- minute_calories_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_calories_narrow ----------------"
-
-``` r
 glimpse(minute_calories_narrow)
-```
-
-    ## Rows: 1,325,580
-    ## Columns: 3
-    ## $ Id             <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960…
-    ## $ ActivityMinute <chr> "4/12/2016 12:00:00 AM", "4/12/2016 12:01:00 AM", "4/12…
-    ## $ Calories       <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0.9438,…
-
-``` r
 print("---------------- minute_calories_wide ----------------")
-```
-
-    ## [1] "---------------- minute_calories_wide ----------------"
-
-``` r
 glimpse(minute_calories_wide)
-```
-
-    ## Rows: 21,645
-    ## Columns: 62
-    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
-    ## $ ActivityHour <chr> "4/13/2016 12:00:00 AM", "4/13/2016 1:00:00 AM", "4/13/20…
-    ## $ Calories00   <dbl> 1.8876, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories01   <dbl> 2.2022, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories02   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories03   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories04   <dbl> 0.9438, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories05   <dbl> 2.0449, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories06   <dbl> 0.9438, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories07   <dbl> 2.2022, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories08   <dbl> 0.9438, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories09   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories10   <dbl> 0.9438, 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories11   <dbl> 0.78650, 0.78650, 0.78650, 2.04490, 0.78650, 0.78650, 0.7…
-    ## $ Calories12   <dbl> 0.78650, 0.94380, 0.78650, 0.94380, 0.78650, 0.78650, 0.7…
-    ## $ Calories13   <dbl> 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
-    ## $ Calories14   <dbl> 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
-    ## $ Calories15   <dbl> 0.9438, 0.7865, 0.7865, 0.9438, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories16   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories17   <dbl> 0.7865, 0.7865, 0.7865, 0.9438, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories18   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories19   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0.9438, 0.7865, 0…
-    ## $ Calories20   <dbl> 1.88760, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
-    ## $ Calories21   <dbl> 0.94380, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
-    ## $ Calories22   <dbl> 0.94380, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
-    ## $ Calories23   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories24   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories25   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
-    ## $ Calories26   <dbl> 2.3595, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
-    ## $ Calories27   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories28   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories29   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories30   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories31   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
-    ## $ Calories32   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories33   <dbl> 1.8876, 0.7865, 0.7865, 0.9438, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories34   <dbl> 0.9438, 0.7865, 0.7865, 2.0449, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories35   <dbl> 0.7865, 0.7865, 0.7865, 2.0449, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories36   <dbl> 0.7865, 0.7865, 0.7865, 1.8876, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories37   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories38   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories39   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories40   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0…
-    ## $ Calories41   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 2…
-    ## $ Calories42   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
-    ## $ Calories43   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0…
-    ## $ Calories44   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories45   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories46   <dbl> 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
-    ## $ Calories47   <dbl> 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.78650, 0.7…
-    ## $ Calories48   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.9438, 0…
-    ## $ Calories49   <dbl> 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories50   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
-    ## $ Calories51   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
-    ## $ Calories52   <dbl> 2.0449, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories53   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories54   <dbl> 2.3595, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories55   <dbl> 1.8876, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories56   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories57   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories58   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0…
-    ## $ Calories59   <dbl> 0.9438, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 0.7865, 2…
-
-``` r
 print("---------------- minute_intensities_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_intensities_narrow ----------------"
-
-``` r
 glimpse(minute_intensities_narrow)
-```
-
-    ## Rows: 1,325,580
-    ## Columns: 3
-    ## $ Id             <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960…
-    ## $ ActivityMinute <chr> "4/12/2016 12:00:00 AM", "4/12/2016 12:01:00 AM", "4/12…
-    ## $ Intensity      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-
-``` r
 print("---------------- minute_intensities_wide ----------------")
-```
-
-    ## [1] "---------------- minute_intensities_wide ----------------"
-
-``` r
 glimpse(minute_intensities_wide)
-```
-
-    ## Rows: 21,645
-    ## Columns: 62
-    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
-    ## $ ActivityHour <chr> "4/13/2016 12:00:00 AM", "4/13/2016 1:00:00 AM", "4/13/20…
-    ## $ Intensity00  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 3, …
-    ## $ Intensity01  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity02  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, …
-    ## $ Intensity03  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, …
-    ## $ Intensity04  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity05  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
-    ## $ Intensity06  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, …
-    ## $ Intensity07  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, …
-    ## $ Intensity08  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, …
-    ## $ Intensity09  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity10  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
-    ## $ Intensity11  <int> 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, …
-    ## $ Intensity12  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, …
-    ## $ Intensity13  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0, 1, 0, 0, …
-    ## $ Intensity14  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, …
-    ## $ Intensity15  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity16  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, …
-    ## $ Intensity17  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 1, 0, 0, 1, …
-    ## $ Intensity18  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, …
-    ## $ Intensity19  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, …
-    ## $ Intensity20  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, …
-    ## $ Intensity21  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 3, 1, 0, 0, 0, …
-    ## $ Intensity22  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 3, 0, 0, 0, 0, …
-    ## $ Intensity23  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, …
-    ## $ Intensity24  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 3, 0, 0, 0, 0, …
-    ## $ Intensity25  <int> 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 3, 0, 0, 0, 0, …
-    ## $ Intensity26  <int> 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 0, 0, …
-    ## $ Intensity27  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, …
-    ## $ Intensity28  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, …
-    ## $ Intensity29  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, …
-    ## $ Intensity30  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, …
-    ## $ Intensity31  <int> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, …
-    ## $ Intensity32  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity33  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity34  <int> 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity35  <int> 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, …
-    ## $ Intensity36  <int> 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity37  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity38  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity39  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity40  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Intensity41  <int> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, …
-    ## $ Intensity42  <int> 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
-    ## $ Intensity43  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
-    ## $ Intensity44  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, …
-    ## $ Intensity45  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, …
-    ## $ Intensity46  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, …
-    ## $ Intensity47  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, …
-    ## $ Intensity48  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, …
-    ## $ Intensity49  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, …
-    ## $ Intensity50  <int> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …
-    ## $ Intensity51  <int> 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 1, …
-    ## $ Intensity52  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, …
-    ## $ Intensity53  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2, 1, …
-    ## $ Intensity54  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, …
-    ## $ Intensity55  <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 1, …
-    ## $ Intensity56  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 1, …
-    ## $ Intensity57  <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 1, …
-    ## $ Intensity58  <int> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, …
-    ## $ Intensity59  <int> 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 3, 0, …
-
-``` r
 print("---------------- minute_METs_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_METs_narrow ----------------"
-
-``` r
 glimpse(minute_METs_narrow)
-```
-
-    ## Rows: 1,325,580
-    ## Columns: 3
-    ## $ Id             <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960…
-    ## $ ActivityMinute <chr> "4/12/2016 12:00:00 AM", "4/12/2016 12:01:00 AM", "4/12…
-    ## $ METs           <int> 10, 10, 10, 10, 10, 12, 12, 12, 12, 12, 12, 12, 10, 10,…
-
-``` r
 print("---------------- minute_sleep ----------------")
-```
-
-    ## [1] "---------------- minute_sleep ----------------"
-
-``` r
 glimpse(minute_sleep)
-```
-
-    ## Rows: 188,521
-    ## Columns: 4
-    ## $ Id    <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960366, 1503…
-    ## $ date  <chr> "4/12/2016 2:47:30 AM", "4/12/2016 2:48:30 AM", "4/12/2016 2:49:…
-    ## $ value <int> 3, 2, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1…
-    ## $ logId <dbl> 11380564589, 11380564589, 11380564589, 11380564589, 11380564589,…
-
-``` r
 print("---------------- minute_steps_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_steps_narrow ----------------"
-
-``` r
 glimpse(minute_steps_narrow)
-```
-
-    ## Rows: 1,325,580
-    ## Columns: 3
-    ## $ Id             <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 1503960…
-    ## $ ActivityMinute <chr> "4/12/2016 12:00:00 AM", "4/12/2016 12:01:00 AM", "4/12…
-    ## $ Steps          <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-
-``` r
 print("---------------- minute_steps_wide ----------------")
-```
-
-    ## [1] "---------------- minute_steps_wide ----------------"
-
-``` r
 glimpse(minute_steps_wide)
-```
-
-    ## Rows: 21,645
-    ## Columns: 62
-    ## $ Id           <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150396036…
-    ## $ ActivityHour <chr> "4/13/2016 12:00:00 AM", "4/13/2016 1:00:00 AM", "4/13/20…
-    ## $ Steps00      <int> 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 9, 0, 0, 0, 0, 0, 91…
-    ## $ Steps01      <int> 16, 0, 0, 0, 0, 0, 0, 0, 0, 14, 11, 0, 0, 0, 0, 0, 0, 0, …
-    ## $ Steps02      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 30, 0, 0, 0, 64, 0, 0, 0, …
-    ## $ Steps03      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 51, 0, 0, 0, 22, 0, 0, 0, …
-    ## $ Steps04      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 0, 24, 0, 0, 0, 0, 0, 0…
-    ## $ Steps05      <int> 9, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 32…
-    ## $ Steps06      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 5, 0, 0, 30, 0, 0…
-    ## $ Steps07      <int> 17, 0, 0, 0, 0, 0, 0, 0, 0, 12, 8, 0, 0, 0, 0, 0, 35, 0, …
-    ## $ Steps08      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 81, 0, 0, 4, 0, 0, 0, 0, 0,…
-    ## $ Steps09      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 14, 0, 0, 0, 0, 0, 0…
-    ## $ Steps10      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 81,…
-    ## $ Steps11      <int> 0, 0, 0, 10, 0, 0, 0, 0, 6, 109, 0, 0, 0, 0, 14, 0, 0, 0,…
-    ## $ Steps12      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 0, 29, 9, 0, 31, 0, 23, 0…
-    ## $ Steps13      <int> 0, 0, 0, 0, 0, 0, 0, 0, 19, 145, 0, 0, 0, 0, 39, 0, 51, 0…
-    ## $ Steps14      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 15, 0, 0, 51, 0, 0, 0,…
-    ## $ Steps15      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 62, 6, 0, 0, 0, 0, 0, …
-    ## $ Steps16      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 31, 0, 8, 24, 0, 0, 0, …
-    ## $ Steps17      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 58, 65, 43, 0, 0,…
-    ## $ Steps18      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 110, 15, 92, 0, 0,…
-    ## $ Steps19      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 97, 51, 80, 0, 0, …
-    ## $ Steps20      <int> 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 10, 0, 0, …
-    ## $ Steps21      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 27, 0, 5, 126, 9, 0, 0, …
-    ## $ Steps22      <int> 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 17, 0, 4, 126, 0, 0, 0,…
-    ## $ Steps23      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 0, 0, 109, 0, 0, 0, …
-    ## $ Steps24      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 29, 0, 0, 112, 0, 0, 0,…
-    ## $ Steps25      <int> 11, 0, 0, 0, 0, 0, 0, 26, 0, 0, 9, 13, 65, 0, 93, 0, 0, 0…
-    ## $ Steps26      <int> 21, 0, 0, 0, 0, 0, 0, 11, 0, 0, 6, 0, 0, 4, 121, 0, 0, 0,…
-    ## $ Steps27      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 123, 0, 0, 0, …
-    ## $ Steps28      <int> 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0…
-    ## $ Steps29      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0,…
-    ## $ Steps30      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 66, 0, 0…
-    ## $ Steps31      <int> 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 20, 0, 66, 0, 0…
-    ## $ Steps32      <int> 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0,…
-    ## $ Steps33      <int> 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0…
-    ## $ Steps34      <int> 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 0, 0, 0, 0, 0…
-    ## $ Steps35      <int> 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 4, 0, 83, 0, 0, 0, 0, 4, 0,…
-    ## $ Steps36      <int> 0, 0, 0, 6, 0, 0, 0, 0, 45, 21, 0, 8, 8, 0, 0, 0, 0, 0, 0…
-    ## $ Steps37      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-    ## $ Steps38      <int> 0, 0, 0, 0, 0, 0, 0, 0, 7, 84, 0, 65, 0, 0, 0, 0, 0, 0, 0…
-    ## $ Steps39      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 65, 0, 0, 0, 0, 0, 0, …
-    ## $ Steps40      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 8, 0, 0, 0, 0, 0, 0, 0, 0,…
-    ## $ Steps41      <int> 0, 0, 0, 0, 0, 0, 0, 28, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 27…
-    ## $ Steps42      <int> 0, 0, 0, 0, 0, 0, 0, 7, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12…
-    ## $ Steps43      <int> 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12…
-    ## $ Steps44      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 11…
-    ## $ Steps45      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 122, 0, 0, 0, 0, 0, 0, 4, 0, 4…
-    ## $ Steps46      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 0, 64, 0, 0, …
-    ## $ Steps47      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 0, 29, 7, 35, …
-    ## $ Steps48      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 16, 0, 7, 0, 0, 23, 7, 31,…
-    ## $ Steps49      <int> 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 12, 0, 8, 6…
-    ## $ Steps50      <int> 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11…
-    ## $ Steps51      <int> 9, 0, 0, 0, 0, 0, 0, 13, 21, 8, 0, 0, 0, 0, 0, 12, 10, 39…
-    ## $ Steps52      <int> 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 13, 1…
-    ## $ Steps53      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 35, 0, 63, 1…
-    ## $ Steps54      <int> 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 0, 36, …
-    ## $ Steps55      <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 84, 0, 7, 0, 0, 0, 81, 4…
-    ## $ Steps56      <int> 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 5, 0, 0, 0, 0, 0, 47, 2…
-    ## $ Steps57      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 115, …
-    ## $ Steps58      <int> 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 105, …
-    ## $ Steps59      <int> 0, 0, 0, 0, 0, 0, 0, 16, 2, 105, 0, 0, 12, 0, 0, 0, 0, 11…
-
-``` r
 print("---------------- sleep_day ----------------")
-```
-
-    ## [1] "---------------- sleep_day ----------------"
-
-``` r
 glimpse(sleep_day)
-```
-
-    ## Rows: 413
-    ## Columns: 5
-    ## $ Id                 <dbl> 1503960366, 1503960366, 1503960366, 1503960366, 150…
-    ## $ SleepDay           <chr> "4/12/2016 12:00:00 AM", "4/13/2016 12:00:00 AM", "…
-    ## $ TotalSleepRecords  <int> 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
-    ## $ TotalMinutesAsleep <int> 327, 384, 412, 340, 700, 304, 360, 325, 361, 430, 2…
-    ## $ TotalTimeInBed     <int> 346, 407, 442, 367, 712, 320, 377, 364, 384, 449, 3…
-
-``` r
 print("---------------- weight_loginfo ----------------")
-```
-
-    ## [1] "---------------- weight_loginfo ----------------"
-
-``` r
 glimpse(weight_loginfo)
 ```
-
-    ## Rows: 67
-    ## Columns: 8
-    ## $ Id             <dbl> 1503960366, 1503960366, 1927972279, 2873212765, 2873212…
-    ## $ Date           <chr> "5/2/2016 11:59:59 PM", "5/3/2016 11:59:59 PM", "4/13/2…
-    ## $ WeightKg       <dbl> 52.6, 52.6, 133.5, 56.7, 57.3, 72.4, 72.3, 69.7, 70.3, …
-    ## $ WeightPounds   <dbl> 115.9631, 115.9631, 294.3171, 125.0021, 126.3249, 159.6…
-    ## $ Fat            <int> 22, NA, NA, NA, NA, 25, NA, NA, NA, NA, NA, NA, NA, NA,…
-    ## $ BMI            <dbl> 22.65, 22.65, 47.54, 21.45, 21.69, 27.45, 27.38, 27.25,…
-    ## $ IsManualReport <chr> "True", "True", "False", "True", "True", "True", "True"…
-    ## $ LogId          <dbl> 1.462234e+12, 1.462320e+12, 1.460510e+12, 1.461283e+12,…
 
 From the glimpse function, we can find out that
 
@@ -806,111 +353,24 @@ how many days are recorded in each file.
 
 ``` r
 n_unique(daily_activity$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(daily_calories$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(daily_intensities$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(daily_steps$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(heartrate_seconds$id)
-```
-
-    ## [1] 14
-
-``` r
 n_unique(hourly_calories$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(hourly_intensities$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(hourly_steps$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(minute_calories_narrow$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(minute_calories_wide$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(minute_intensities_narrow$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(minute_intensities_wide$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(minute_METs_narrow$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(minute_sleep$id)
-```
-
-    ## [1] 24
-
-``` r
 n_unique(minute_steps_narrow$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(minute_steps_wide$id)
-```
-
-    ## [1] 33
-
-``` r
 n_unique(sleep_day$id)
-```
-
-    ## [1] 24
-
-``` r
 n_unique(weight_loginfo$id)
 ```
-
-    ## [1] 8
 
 The timestamp attribute should be organized before checking how many
 days each file is.
@@ -942,128 +402,30 @@ weight_loginfo$activity_day <- mdy_hms(weight_loginfo$activity_day, tz = Sys.tim
 
 ``` r
 n_unique(daily_activity$activity_day)
-```
-
-    ## [1] 31
-
-``` r
 n_unique(daily_calories$activity_day)
-```
-
-    ## [1] 31
-
-``` r
 n_unique(daily_intensities$activity_day)
-```
-
-    ## [1] 31
-
-``` r
 n_unique(daily_steps$activity_day)
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(heartrate_seconds$activity_second))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(hourly_calories$activity_hour))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(hourly_intensities$activity_hour))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(hourly_steps$activity_hour))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(minute_calories_narrow$activity_minute))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(minute_calories_wide$activity_hour))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(minute_intensities_narrow$activity_minute))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(minute_intensities_wide$activity_hour))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(minute_METs_narrow$activity_minute))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(minute_sleep$activity_minute))
-```
-
-    ## [1] 32
-
-``` r
 n_unique(date(minute_steps_narrow$activity_minute))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(minute_steps_wide$activity_hour))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(sleep_day$activity_day))
-```
-
-    ## [1] 31
-
-``` r
 n_unique(date(weight_loginfo$activity_day))
 ```
-
-    ## [1] 31
 
 The minute_sleep contains 32 days. After checking, that is because some
 user sleep before 12:00 AM, so the day 2016-04-11 is also included.
 
 ``` r
 unique(date(minute_sleep$activity_minute))
-```
-
-    ##  [1] "2016-04-12" "2016-04-13" "2016-04-15" "2016-04-16" "2016-04-17"
-    ##  [6] "2016-04-19" "2016-04-20" "2016-04-21" "2016-04-23" "2016-04-24"
-    ## [11] "2016-04-25" "2016-04-26" "2016-04-28" "2016-04-29" "2016-04-30"
-    ## [16] "2016-05-01" "2016-05-02" "2016-05-03" "2016-05-05" "2016-05-06"
-    ## [21] "2016-05-07" "2016-05-08" "2016-05-09" "2016-05-10" "2016-05-11"
-    ## [26] "2016-04-14" "2016-04-11" "2016-04-18" "2016-04-22" "2016-04-27"
-    ## [31] "2016-05-04" "2016-05-12"
-
-``` r
 # minute_sleep[minute_sleep$activity_minute >= "2016-04-11" & minute_sleep$activity_minute < "2016-04-12",]
 ```
 
@@ -1134,300 +496,142 @@ the missing value in case I need to investigate the missing part later.
 
 ``` r
 print("---------------- daily_activity ----------------")
-```
-
-    ## [1] "---------------- daily_activity ----------------"
-
-``` r
 if (sum(is.na(daily_activity)) != 0) {
     print("Position of missing values:")
     which(is.na(daily_activity))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- daily_calories ----------------")
-```
-
-    ## [1] "---------------- daily_calories ----------------"
-
-``` r
 if (sum(is.na(daily_calories)) != 0) {
     print("Position of missing values:")
     which(is.na(daily_calories))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- daily_intensities ----------------")
-```
-
-    ## [1] "---------------- daily_intensities ----------------"
-
-``` r
 if (sum(is.na(daily_intensities)) != 0) {
     print("Position of missing values:")
     which(is.na(daily_intensities))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- daily_steps ----------------")
-```
-
-    ## [1] "---------------- daily_steps ----------------"
-
-``` r
 if (sum(is.na(daily_steps)) != 0) {
     print("Position of missing values:")
     which(is.na(daily_steps))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- heartrate_seconds ----------------")
-```
-
-    ## [1] "---------------- heartrate_seconds ----------------"
-
-``` r
 if (sum(is.na(heartrate_seconds)) != 0) {
     print("Position of missing values:")
     which(is.na(heartrate_seconds))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- hourly_calories ----------------")
-```
-
-    ## [1] "---------------- hourly_calories ----------------"
-
-``` r
 if (sum(is.na(hourly_calories)) != 0) {
     print("Position of missing values:")
     which(is.na(hourly_calories))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- hourly_intensities ----------------")
-```
-
-    ## [1] "---------------- hourly_intensities ----------------"
-
-``` r
 if (sum(is.na(hourly_intensities)) != 0) {
     print("Position of missing values:")
     which(is.na(hourly_intensities))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- hourly_steps ----------------")
-```
-
-    ## [1] "---------------- hourly_steps ----------------"
-
-``` r
 if (sum(is.na(hourly_steps)) != 0) {
     print("Position of missing values:")
     which(is.na(hourly_steps))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- minute_calories_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_calories_narrow ----------------"
-
-``` r
 if (sum(is.na(minute_calories_narrow)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_calories_narrow))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- minute_calories_wide ----------------")
-```
-
-    ## [1] "---------------- minute_calories_wide ----------------"
-
-``` r
 if (sum(is.na(minute_calories_wide)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_calories_wide))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- minute_intensities_wide ----------------")
-```
-
-    ## [1] "---------------- minute_intensities_wide ----------------"
-
-``` r
 if (sum(is.na(minute_intensities_wide)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_intensities_wide))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- minute_intensities_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_intensities_narrow ----------------"
-
-``` r
 if (sum(is.na(minute_intensities_narrow)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_intensities_narrow))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- minute_METs_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_METs_narrow ----------------"
-
-``` r
 if (sum(is.na(minute_METs_narrow)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_METs_narrow))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- minute_sleep ----------------")
-```
-
-    ## [1] "---------------- minute_sleep ----------------"
-
-``` r
 if (sum(is.na(minute_sleep)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_sleep))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- minute_steps_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_steps_narrow ----------------"
-
-``` r
 if (sum(is.na(minute_steps_narrow)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_steps_narrow))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- minute_steps_wide ----------------")
-```
-
-    ## [1] "---------------- minute_steps_wide ----------------"
-
-``` r
 if (sum(is.na(minute_steps_wide)) != 0) {
     print("Position of missing values:")
     which(is.na(minute_steps_wide))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- sleep_day ----------------")
-```
-
-    ## [1] "---------------- sleep_day ----------------"
-
-``` r
 if (sum(is.na(sleep_day)) != 0) {
     print("Position of missing values:")
     which(is.na(sleep_day))
 } else {
     print("No missing value")
 }
-```
 
-    ## [1] "No missing value"
-
-``` r
 print("---------------- weight_loginfo ----------------")
-```
-
-    ## [1] "---------------- weight_loginfo ----------------"
-
-``` r
 if (sum(is.na(weight_loginfo)) != 0) {
     print("Position of missing values:")
     which(is.na(weight_loginfo))
@@ -1435,13 +639,6 @@ if (sum(is.na(weight_loginfo)) != 0) {
     print("No missing value")
 }
 ```
-
-    ## [1] "Position of missing values:"
-
-    ##  [1] 270 271 272 273 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289
-    ## [20] 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308
-    ## [39] 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327
-    ## [58] 328 329 330 331 332 333 334 335
 
 ### Check and Remove Duplicate
 
@@ -1520,283 +717,134 @@ these steps for all data.
 
 ``` r
 print("---------------- daily_activity ----------------")
-```
-
-    ## [1] "---------------- daily_activity ----------------"
-
-``` r
 if (nrow(daily_activity) == nrow(daily_activity %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   daily_activity <- daily_activity %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- daily_calories ----------------")
-```
-
-    ## [1] "---------------- daily_calories ----------------"
-
-``` r
 if (nrow(daily_calories) == nrow(daily_calories %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   daily_calories <- daily_calories %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- daily_intensities ----------------")
-```
-
-    ## [1] "---------------- daily_intensities ----------------"
-
-``` r
 if (nrow(daily_intensities) == nrow(daily_intensities %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   daily_intensities <- daily_intensities %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- daily_steps ----------------")
-```
-
-    ## [1] "---------------- daily_steps ----------------"
-
-``` r
 if (nrow(daily_steps) == nrow(daily_steps %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   daily_steps <- daily_steps %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- heartrate_seconds ----------------")
-```
-
-    ## [1] "---------------- heartrate_seconds ----------------"
-
-``` r
 if (nrow(heartrate_seconds) == nrow(heartrate_seconds %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   heartrate_seconds <- heartrate_seconds %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- hourly_calories ----------------")
-```
-
-    ## [1] "---------------- hourly_calories ----------------"
-
-``` r
 if (nrow(hourly_calories) == nrow(hourly_calories %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   hourly_calories <- hourly_calories %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- hourly_intensities ----------------")
-```
-
-    ## [1] "---------------- hourly_intensities ----------------"
-
-``` r
 if (nrow(hourly_intensities) == nrow(hourly_intensities %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   hourly_intensities <- hourly_intensities %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- hourly_steps ----------------")
-```
-
-    ## [1] "---------------- hourly_steps ----------------"
-
-``` r
 if (nrow(hourly_steps) == nrow(hourly_steps %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   hourly_steps <- hourly_steps %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- minute_calories_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_calories_narrow ----------------"
-
-``` r
 if (nrow(minute_calories_narrow) == nrow(minute_calories_narrow %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_calories_narrow <- minute_calories_narrow %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- minute_calories_wide ----------------")
-```
-
-    ## [1] "---------------- minute_calories_wide ----------------"
-
-``` r
 if (nrow(minute_calories_wide) == nrow(minute_calories_wide %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_calories_wide <- minute_calories_wide %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- minute_intensities_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_intensities_narrow ----------------"
-
-``` r
 if (nrow(minute_intensities_narrow) == nrow(minute_intensities_narrow %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_intensities_narrow <- minute_intensities_narrow %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- minute_intensities_wide ----------------")
-```
-
-    ## [1] "---------------- minute_intensities_wide ----------------"
-
-``` r
 if (nrow(minute_intensities_wide) == nrow(minute_intensities_wide %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_intensities_wide <- minute_intensities_wide %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- minute_METs_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_METs_narrow ----------------"
-
-``` r
 if (nrow(minute_METs_narrow) == nrow(minute_METs_narrow %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_METs_narrow <- minute_METs_narrow %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- minute_sleep ----------------")
-```
-
-    ## [1] "---------------- minute_sleep ----------------"
-
-``` r
 if (nrow(minute_sleep) == nrow(minute_sleep %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_sleep <- minute_sleep %>% distinct()
 }
-```
 
-    ## [1] "Remove duplicate rows"
-
-``` r
 print("---------------- minute_steps_narrow ----------------")
-```
-
-    ## [1] "---------------- minute_steps_narrow ----------------"
-
-``` r
 if (nrow(minute_steps_narrow) == nrow(minute_steps_narrow %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_steps_narrow <- minute_steps_narrow %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- minute_steps_wide ----------------")
-```
-
-    ## [1] "---------------- minute_steps_wide ----------------"
-
-``` r
 if (nrow(minute_steps_wide) == nrow(minute_steps_wide %>% distinct())) {
   print("No duplicate rows")
 } else {
   print("Remove duplicate rows")
   minute_steps_wide <- minute_steps_wide %>% distinct()
 }
-```
 
-    ## [1] "No duplicate rows"
-
-``` r
 print("---------------- weight_loginfo ----------------")
-```
-
-    ## [1] "---------------- weight_loginfo ----------------"
-
-``` r
 if (nrow(weight_loginfo) == nrow(weight_loginfo %>% distinct())) {
   print("No duplicate rows")
 } else {
@@ -1804,8 +852,6 @@ if (nrow(weight_loginfo) == nrow(weight_loginfo %>% distinct())) {
   weight_loginfo <- weight_loginfo %>% distinct()
 }
 ```
-
-    ## [1] "No duplicate rows"
 
 ### Check Equality
 
@@ -1819,101 +865,24 @@ attributes in daily_activity, then I can just focus on daily_activity.
 # --- Check if data are the same
 ## daily_activity vs. daily_calories
 identical(daily_activity$id, daily_calories$id)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$activity_day, daily_calories$activity_day)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$calories, daily_calories$calories)
-```
-
-    ## [1] TRUE
-
-``` r
 ## daily_activity vs. daily_steps
 identical(daily_activity$id, daily_steps$id)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$activity_day, daily_steps$activity_day)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$total_steps, daily_steps$total_steps)
-```
-
-    ## [1] TRUE
-
-``` r
 ## daily_activity vs. daily_intensities
 identical(daily_activity$id, daily_intensities$id)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$activity_day, daily_intensities$activity_day)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$sedentary_minutes, daily_intensities$sedentary_minutes)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$light_active_minutes, daily_intensities$light_active_minutes)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$moderate_active_minutes, daily_intensities$moderate_active_minutes)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$very_active_minutes, daily_intensities$very_active_minutes)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$sedentary_active_distance, daily_intensities$sedentary_active_distance)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$light_active_distance, daily_intensities$light_active_distance)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$moderate_active_distance, daily_intensities$moderate_active_distance)
-```
-
-    ## [1] TRUE
-
-``` r
 identical(daily_activity$very_active_distance, daily_intensities$very_active_distance)
 ```
-
-    ## [1] TRUE
 
 And I’m also curious whether or not the user ids of two sleep-related
 data is the same.
