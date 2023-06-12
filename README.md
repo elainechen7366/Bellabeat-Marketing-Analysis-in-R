@@ -24,3 +24,6 @@ This is a capstone project of the course Google Data Analytics. In this case stu
 4. Extract Fitbit dataset and put csv files under the `Data` folder
 5. Start with bellabeat-case-study.Rmd or execute prepare.R, process.R, and analyze.R respectively.
 
+## Others
+- This project is posted [here](https://www.kaggle.com/code/elainechen7366/marketing-analysis-for-bellabeat-in-r-google-prj) as well
+- I also create a [Google slides](https://docs.google.com/presentation/d/136ZEbkKa0BpZ1VB-WfPrk06EFtrrXYVXoNiw1vdtpaw/edit#slide=id.g214224d8f13_0_6) for this project 
